@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prepara tu ficha de solicitud de TFM · MUTECD</title>
+<meta name="description" content="Asistente gratuito para preparar, revisar y copiar los apartados de la ficha de solicitud de propuesta de TFM.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%9D%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --tinta:#1f2a44; --tinta-2:#3a4561; --gris:#5d667a; --linea:#d9dee8; --fondo:#eef1f6; --papel:#ffffff;
+  --rojo:#c8102e; --rojo-bg:#fdecee; --verde:#0b7a3e; --verde-bg:#e6f4ec; --ambar:#8a5300; --ambar-bg:#fff3d9;
+  --azul:#0d6480; --azul-bg:#e4f2f7; --foco:#2458d6;
+  --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, "Iowan Old Style", Georgia, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--fondo);color:var(--tinta);font:16px/1.55 var(--sans);-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:var(--serif);line-height:1.2;margin:0}
+p{margin:.4em 0}
+a{color:var(--azul)}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--foco);outline-offset:2px;border-radius:4px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+.sr{position:absolute;left:-9999px}
+
+/* Cabecera */
+.top{background:var(--tinta);color:#fff}
+.top-in{display:flex;gap:16px;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:10px;flex-wrap:wrap}
+.marca{display:flex;gap:12px;align-items:center}
+.marca h1{font-size:1.35rem;font-weight:600}
+.marca p{margin:0;color:#c9d0e0;font-size:.86rem}
+.sello{width:40px;height:40px;border-radius:9px;background:#fff;color:var(--tinta);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.25rem;flex:none}
+.plazo{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:6px 10px;font-size:.88rem}
+.plazo strong{color:#ffd66b}
+.tabs{display:flex;gap:4px;overflow-x:auto;padding-top:4px;scrollbar-width:thin}
+.tab{background:transparent;border:0;color:#d5dbea;padding:10px 14px;border-radius:8px 8px 0 0;cursor:pointer;white-space:nowrap;font-weight:500}
+.tab:hover{color:#fff;background:rgba(255,255,255,.08)}
+.tab.act{background:var(--fondo);color:var(--tinta);font-weight:700}
+.privacidad{font-size:.86rem;color:var(--gris);padding-top:10px;padding-bottom:4px}
+main{padding-bottom:40px}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:9px;padding:10px 16px;cursor:pointer;background:var(--tinta);color:#fff;font-weight:600;text-decoration:none}
+.btn:hover{background:#2c3a5e}
+.btn.sec{background:#fff;color:var(--tinta);border:1.5px solid var(--linea)}
+.btn.sec:hover{border-color:var(--tinta-2)}
+.btn.copiar{background:var(--azul)}
+.btn.copiar:hover{background:#0a5068}
+.btn.peq{padding:6px 11px;font-size:.88rem;border-radius:7px}
+.btn.fant{background:transparent;color:var(--gris);border:0;text-decoration:underline;padding:6px 4px}
+.acciones{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+
+/* Inicio */
+.hero{padding:34px 0 10px}
+.hero h2{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:600;max-width:24ch}
+.hero p.lead{font-size:1.08rem;color:var(--tinta-2);max-width:62ch}
+.modos{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:22px 0}
+.modo-card{background:var(--papel);border:2px solid var(--linea);border-radius:14px;padding:18px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:6px}
+.modo-card:hover{border-color:var(--tinta)}
+.modo-card .ico{font-size:1.8rem}
+.modo-card h3{font-size:1.35rem}
+.modo-card ul{margin:4px 0 0;padding-left:18px;color:var(--tinta-2);font-size:.93rem}
+.modo-card .ir{margin-top:auto;padding-top:8px;font-weight:700;color:var(--azul)}
+.como{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0 22px;padding:0;list-style:none;counter-reset:c}
+.como li{background:var(--papel);border-radius:12px;padding:14px;border:1px solid var(--linea);counter-increment:c}
+.como li::before{content:counter(c);display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--tinta);color:#fff;font-weight:700;font-size:.85rem;margin-right:8px}
+.leyenda{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:.9rem;color:var(--tinta-2);margin:6px 0}
+.leyenda span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:16px;height:16px;border-radius:4px;display:inline-block}
+
+/* Diseño de modalidad */
+.modo-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:18px 0 12px}
+.modo-head h2{font-size:1.5rem}
+.chip{display:inline-block;border-radius:999px;padding:3px 10px;font-size:.8rem;font-weight:600;background:#fff;border:1px solid var(--linea)}
+.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:22px;align-items:start}
+.pasos{position:sticky;top:10px;display:flex;flex-direction:column;gap:2px;background:var(--papel);border-radius:14px;padding:8px;border:1px solid var(--linea)}
+.paso{display:flex;align-items:center;gap:10px;text-align:left;background:transparent;border:0;border-radius:8px;padding:9px 10px;cursor:pointer;font-size:.93rem;color:var(--tinta-2)}
+.paso:hover{background:var(--fondo)}
+.paso.act{background:var(--tinta);color:#fff;font-weight:600}
+.ic{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:.78rem;flex:none;border:2px solid #b7bfce;color:transparent;background:#fff}
+.ic.ok{background:var(--verde);border-color:var(--verde);color:#fff}
+.ic.curso{border-color:var(--ambar);background:var(--ambar-bg);color:var(--ambar)}
+.ic.aviso{border-color:var(--rojo);background:var(--rojo-bg);color:var(--rojo)}
+.paso.act .ic{border-color:#fff}
+.contenido{min-width:0}
+
+/* Bloques */
+.bloque{background:var(--papel);border:1px solid var(--linea);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.bloque h3{font-size:1.12rem;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--tinta);color:#fff;font:700 .85rem var(--sans);flex:none}
+.ap-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px;flex-wrap:wrap}
+.ap-num{font-family:var(--serif);font-size:2.4rem;line-height:1;color:var(--tinta);font-weight:700}
+.ap-head h2{font-size:1.55rem}
+.limite{display:inline-block;margin-top:6px;font-size:.85rem;font-weight:600;border-radius:6px;padding:3px 8px}
+.limite.obl{background:var(--rojo-bg);color:var(--rojo)}
+.limite.ori{background:var(--azul-bg);color:var(--azul)}
+.ficha{border-left:4px solid var(--linea);padding:8px 12px;background:#f7f8fb;border-radius:0 8px 8px 0;font-size:.92rem;color:var(--tinta-2);margin:0 0 14px}
+.ficha b{color:var(--tinta)}
+.entrada{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.entrada button{border:2px solid var(--linea);background:var(--papel);border-radius:12px;padding:14px;text-align:left;cursor:pointer}
+.entrada button strong{display:block;font-size:1.05rem}
+.entrada button span{font-size:.88rem;color:var(--gris)}
+.entrada button.act{border-color:var(--tinta);box-shadow:inset 0 0 0 1px var(--tinta)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.dos > div{border-radius:10px;padding:10px 12px;font-size:.93rem}
+.dos ul{margin:4px 0 0;padding-left:18px}
+.si{background:var(--verde-bg)} .si b{color:var(--verde)}
+.no{background:var(--rojo-bg)} .no b{color:var(--rojo)}
+
+/* Preguntas */
+.preg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.preg label{display:flex;flex-direction:column;gap:4px}
+.preg .q{font-weight:600}
+.preg .etq{font-size:.75rem;font-weight:700;color:var(--rojo);letter-spacing:.02em}
+.preg input{border:1.5px solid var(--linea);border-radius:9px;padding:10px 12px;background:#fff;width:100%}
+.preg input:focus{border-color:var(--rojo);outline:none;box-shadow:0 0 0 3px var(--rojo-bg)}
+.preg small{color:var(--gris);font-size:.8rem}
+.prefill{color:var(--azul)!important}
+.preg label.off{opacity:.55}
+.preg .etq em{font-style:normal;font-weight:600;color:var(--gris);text-transform:none;letter-spacing:0;margin-left:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.chip-ej{border:1px dashed var(--rojo);background:var(--rojo-bg);color:#8d1626;border-radius:999px;padding:4px 10px;font:inherit;font-size:.78rem;cursor:pointer;line-height:1.25;text-align:left}
+.chip-ej:hover{background:#fbdde2}
+.ops{display:flex;flex-wrap:wrap;gap:8px}
+.op{border:2px solid var(--linea);background:#fff;border-radius:999px;padding:8px 16px;font:inherit;font-weight:600;cursor:pointer}
+.op.sel{border-color:var(--rojo);background:var(--rojo-bg);color:#8d1626}
+.op:hover{border-color:var(--rojo)}
+
+/* Anatomía del apartado */
+.anat .piezas{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.pieza{border:2px dashed var(--linea);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:3px;background:#fbfcfe}
+.pieza.medio{border-color:var(--ambar);background:var(--ambar-bg)}
+.pieza.ok{border-style:solid;border-color:var(--verde);background:var(--verde-bg)}
+.p-et{font-size:.72rem;font-weight:800;letter-spacing:.06em;color:var(--tinta)}
+.pieza.ok .p-et{color:var(--verde)}
+.p-q{font-size:.82rem;color:var(--gris)}
+.p-val{font-weight:650;font-size:.92rem;margin-top:2px;overflow-wrap:anywhere}
+.pieza:not(.ok):not(.medio) .p-val{color:var(--gris);font-weight:500;font-style:italic}
+
+/* Progreso general */
+.prog{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:.86rem;color:var(--gris)}
+.prog .bar{flex:1;max-width:320px;height:8px;background:#e6e9f0;border-radius:99px;overflow:hidden}
+.prog .bar span{display:block;height:100%;background:var(--verde);transition:width .25s}
+.prog strong{color:var(--tinta)}
+.ej-tit{margin:14px 0 6px;font-size:.9rem;color:var(--verde);font-family:var(--sans);text-transform:uppercase;letter-spacing:.04em}
+.ej-tit:first-child{margin-top:0}
+
+/* Plantillas */
+.plants{display:grid;gap:10px}
+.pl{display:flex;gap:12px;border:2px solid var(--linea);border-radius:12px;padding:14px;cursor:pointer;background:#fff}
+.pl.sel{border-color:var(--tinta)}
+.pl input{margin-top:5px;accent-color:var(--tinta);flex:none}
+.pl .cuando{font-size:.88rem;color:var(--gris);margin:2px 0 8px}
+.preview{font-family:var(--serif);font-size:1.08rem;line-height:1.75;background:#fafbfd;border:1px dashed var(--linea);border-radius:10px;padding:10px 12px}
+.slot{border-radius:5px;padding:1px 5px;font-family:var(--sans);font-size:.92em}
+.slot.vacio{color:var(--rojo);background:var(--rojo-bg);border:1.5px dashed var(--rojo);font-weight:700;font-size:.8em;letter-spacing:.01em}
+.slot.lleno{color:var(--rojo);background:transparent;border-bottom:2.5px solid var(--rojo);border-radius:0;padding:0 1px;font-weight:600}
+.pref{background:#e8ebf3;border-radius:4px;padding:0 3px}
+.pv-count{font-size:.8rem;color:var(--gris);margin-top:4px}
+
+/* Resultado */
+.resultado{border:2px solid var(--azul);background:linear-gradient(#fff,#fff)}
+.resultado h3{color:var(--azul)}
+.resultado textarea{width:100%;min-height:120px;border:1.5px solid #b9d6e2;border-radius:10px;padding:12px;font:1.02rem/1.6 var(--serif);resize:vertical;background:#fbfdfe}
+.resultado textarea:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 3px var(--azul-bg)}
+.resultado textarea.corto{min-height:70px}
+.cnt{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:8px;font-size:.9rem}
+.bar{flex:1 1 160px;max-width:260px;height:8px;background:#e3e7ef;border-radius:99px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--verde)}
+.cnt.warn .bar span{background:#d69200} .cnt.err .bar span{background:var(--rojo)}
+.cnt .tipo{color:var(--gris)} .cnt .msg{font-weight:600}
+.cnt.err .msg{color:var(--rojo)} .cnt.warn .msg{color:var(--ambar)}
+
+/* Revisión */
+.rev ul{list-style:none;margin:0;padding:0}
+.rev li{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid #eef0f5;font-size:.95rem}
+.rev li:last-child{border-bottom:0}
+.rev .m{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:.78rem;font-weight:800;color:#fff}
+.m.ok{background:var(--verde)} .m.warn{background:#d69200} .m.err{background:var(--rojo)} .m.info{background:var(--azul)}
+.ver{margin-top:10px;border-radius:10px;padding:10px 12px;font-weight:600}
+.ver.ok{background:var(--verde-bg);color:var(--verde)} .ver.warn{background:var(--ambar-bg);color:var(--ambar)} .ver.err{background:var(--rojo-bg);color:var(--rojo)}
+.nota{font-size:.82rem;color:var(--gris);margin-top:8px}
+
+/* Ejemplo */
+details.ejemplo{border:2px solid var(--verde);border-radius:12px;background:var(--verde-bg);padding:0;margin-bottom:14px}
+details.ejemplo summary{cursor:pointer;padding:12px 16px;font-weight:700;color:var(--verde)}
+details.ejemplo .in{padding:0 16px 14px}
+.ej-txt{font-family:var(--serif);font-size:1.05rem;background:#fff;border-radius:8px;padding:10px 12px;border:1px solid #bfe1cd}
+.ej-notas{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.ej-notas span{font-size:.8rem;background:#fff;border:1px solid #9fd1b4;color:var(--verde);border-radius:99px;padding:2px 9px}
+
+/* Aside */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}
+.lat{position:sticky;top:10px;display:flex;flex-direction:column;gap:12px}
+.consejo{background:var(--ambar-bg);border-radius:12px;padding:14px 16px;border:1px solid #f0d79b}
+.consejo h4,.errores h4,.minifaq h4{margin:0 0 6px;font-family:var(--serif);font-size:1.05rem}
+.consejo ul{margin:0;padding-left:18px;font-size:.92rem}
+.errores{background:#fff;border-radius:12px;padding:14px 16px;border:1px solid var(--linea)}
+.err-item{border-top:1px solid #eef0f5;padding:8px 0;font-size:.88rem}
+.err-item:first-of-type{border-top:0}
+.err-item .mal{color:var(--rojo);font-weight:600}
+.err-item .bien{color:var(--verde);font-weight:600}
+.err-item .por{color:var(--tinta-2)}
+.minifaq{background:#fff;border-radius:12px;padding:14px 16px;border:1px solid var(--linea);font-size:.9rem}
+.minifaq details{border-top:1px solid #eef0f5;padding:6px 0}
+.minifaq summary{cursor:pointer;font-weight:600}
+
+/* Checklists */
+.check{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border-radius:9px;cursor:pointer}
+.check:hover{background:var(--fondo)}
+.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--verde);flex:none}
+.check.crit.falta span::after{content:" · requisito";color:var(--rojo);font-size:.78rem;font-weight:700}
+.alerta{border-radius:12px;padding:12px 14px;margin:10px 0;font-size:.95rem}
+.alerta.roja{background:var(--rojo-bg);color:#8d0b20;border:1px solid #f3b8c1}
+.alerta.verde{background:var(--verde-bg);color:var(--verde);border:1px solid #a9d8bd}
+.alerta.azul{background:var(--azul-bg);color:#0a4d63;border:1px solid #b3d9e6}
+.alerta.ambar{background:var(--ambar-bg);color:#6a4000;border:1px solid #f0d79b}
+.alerta strong{display:block;margin-bottom:2px}
+.info-modo{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:6px}
+.info-modo div{background:var(--fondo);border-radius:10px;padding:10px 12px;font-size:.92rem}
+.info-modo b{display:block;font-size:.8rem;color:var(--gris)}
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tres div{border-radius:10px;padding:12px;background:var(--fondo);font-size:.9rem}
+.tres b{display:block;font-family:var(--serif);font-size:1.05rem}
+.tres .crit{background:var(--tinta);color:#fff}
+
+/* Briefings */
+.briefs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.brief{border:2px solid var(--linea);border-radius:12px;padding:12px;background:#fff;text-align:left;cursor:pointer}
+.brief.sel{border-color:var(--tinta);box-shadow:inset 0 0 0 1px var(--tinta)}
+.brief .b-ico{font-size:1.4rem}
+.brief strong{display:block;margin:2px 0}
+.brief span{font-size:.85rem;color:var(--gris)}
+.brief-det dl{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;margin:8px 0;font-size:.93rem}
+.brief-det dt{font-weight:700;color:var(--gris)}
+.brief-det dd{margin:0}
+.brief-det ul{margin:4px 0;padding-left:18px;font-size:.92rem}
+
+/* Líneas */
+.lineas{display:grid;gap:6px}
+.linea{display:flex;gap:10px;align-items:center;border:1.5px solid var(--linea);border-radius:10px;padding:10px 12px;cursor:pointer;background:#fff}
+.linea.sel{border-color:var(--tinta);background:#f3f5fa}
+.linea input{accent-color:var(--tinta)}
+.linea small{color:var(--gris);min-width:62px}
+.linea em{font-style:normal;font-size:.78rem;color:var(--azul);font-weight:700;margin-left:auto}
+
+/* Pegar */
+.pegar textarea{width:100%;min-height:120px;border:1.5px solid var(--linea);border-radius:10px;padding:12px;font:1rem/1.6 var(--serif);resize:vertical}
+.diff{font-family:var(--serif);font-size:1.02rem;line-height:1.8;background:#fafbfd;border:1px solid var(--linea);border-radius:10px;padding:10px 12px}
+.diff ins{background:#d8f0e1;color:#064d27;text-decoration:none;border-radius:3px;padding:0 2px}
+.diff del{background:#fbdde2;color:#8d0b20;border-radius:3px;padding:0 2px}
+.cambios{margin:8px 0;padding-left:18px;font-size:.92rem}
+
+/* Final */
+.resumen{list-style:none;margin:0;padding:0}
+.resumen li{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #eef0f5}
+.resumen li .et{flex:1}
+.resumen .st{font-size:.85rem;font-weight:600}
+.st.ok{color:var(--verde)} .st.warn{color:var(--ambar)} .st.err{color:var(--rojo)}
+.copia{border:1px solid var(--linea);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.copia header{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#f4f6fa;padding:8px 12px;font-weight:700;font-size:.93rem}
+.copia .cuerpo{padding:12px;font-family:var(--serif);font-size:1.02rem;white-space:pre-wrap}
+.copia .vacio{color:var(--rojo);font-family:var(--sans);font-size:.9rem}
+.marca-form{background:var(--fondo);border-radius:10px;padding:10px 12px;font-size:.93rem;margin-bottom:12px}
+.titular{font-family:var(--serif);font-size:clamp(1.4rem,3vw,1.9rem);margin-bottom:6px}
+.titular.ok{color:var(--verde)}
+
+/* Navegación */
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:6px}
+
+/* FAQ */
+.faq-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:18px 0 12px}
+.faq-bar input{flex:1 1 240px;border:1.5px solid var(--linea);border-radius:9px;padding:10px 12px}
+.filtro{border:1.5px solid var(--linea);background:#fff;border-radius:99px;padding:6px 12px;cursor:pointer;font-size:.9rem}
+.filtro.act{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.faq details{background:#fff;border:1px solid var(--linea);border-radius:12px;padding:0;margin-bottom:8px}
+.faq summary{cursor:pointer;padding:12px 16px;font-weight:600;display:flex;gap:10px;align-items:baseline}
+.faq summary .chip{flex:none}
+.faq .resp{padding:0 16px 14px;color:var(--tinta-2)}
+
+/* Pie y toast */
+footer{border-top:1px solid var(--linea);padding:18px 0 30px;color:var(--gris);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+#toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--tinta);color:#fff;padding:11px 16px;border-radius:10px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:92vw;z-index:10;box-shadow:0 6px 24px rgba(20,30,60,.25)}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (max-width:980px){ .cols{grid-template-columns:1fr} .lat{position:static} }
+@media (max-width:820px){
+  .layout{grid-template-columns:1fr}
+  .pasos{position:static;flex-direction:row;overflow-x:auto;padding:6px}
+  .paso{white-space:nowrap;flex:none}
+  .entrada,.dos,.tres{grid-template-columns:1fr}
+  .brief-det dl{grid-template-columns:1fr}
+  .marca h1{font-size:1.1rem}
+}
+@media (prefers-reduced-motion:reduce){ *{transition:none!important;scroll-behavior:auto!important} }
+@media print{ .top,.pasos,.nav,.lat,footer,.acciones,.privacidad{display:none!important} .layout{display:block} body{background:#fff} }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <div class="marca">
+      <div class="sello" aria-hidden="true">T</div>
+      <div>
+        <h1>Prepara tu ficha de solicitud de TFM</h1>
+        <p>Máster Universitario en Tecnología Educativa y Competencias Digitales</p>
+      </div>
+    </div>
+    <div class="plazo" id="plazo"></div>
+  </div>
+  <nav class="wrap tabs" id="tabs" aria-label="Secciones"></nav>
+</header>
+<p class="wrap privacidad">🔒 Tu texto se procesa en esta herramienta y no necesitas crear una cuenta. No pedimos datos personales y nada se envía a ningún servidor: el borrador se guarda solo en este navegador.</p>
+<main class="wrap" id="main">
+  <noscript><div class="alerta roja"><strong>Esta herramienta necesita JavaScript.</strong>Actívalo en tu navegador para usarla.</div></noscript>
+</main>
+<footer>
+  <div class="wrap">
+    <span>Herramienta de apoyo elaborada a partir de las instrucciones de la coordinación de TFM. No sustituye a las instrucciones oficiales ni aprueba propuestas.</span>
+    <button class="btn fant" data-action="borrarTodo">Borrar mis datos de este navegador</button>
+  </div>
+</footer>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+'use strict';
+/* =====================================================================
+   CONFIGURACIÓN EDITABLE
+   Todo el contenido académico está en este bloque. Para una nueva
+   convocatoria, basta con cambiar CONV. Para añadir un apartado nuevo,
+   se añade una entrada en SEC, su función en REV y su paso en PASOS.
+   ===================================================================== */
+const CONV = {
+  etiqueta: 'Convocatoria 2026',
+  apertura: 'martes 22 de septiembre de 2026',
+  cierre: 'viernes 2 de octubre de 2026',
+  corto: '22 sep – 2 oct 2026'
+};
+
+/* Verbos admitidos para el objetivo general. El primero es el que aparece en la ficha. */
+const VERBOS_OBJ = ['diseñar', 'desarrollar', 'elaborar'];
+const VERBO_DEF = 'diseñar';
+const INI1 = 'El objetivo general de la propuesta es';
+const INI2 = 'un proyecto de innovación tecnológica para mejorar';
+function inicioFicha(v) { return INI1 + ' ' + (v || VERBO_DEF) + ' ' + INI2; }
+const PREFIJO = inicioFicha(VERBO_DEF);
+/* Verbos de diseño aceptados en la revisión y verbos de aplicación desaconsejados */
+const VERBOS_DISENO = ['disenar', 'desarrollar', 'elaborar', 'crear', 'construir', 'generar', 'planificar', 'proponer', 'configurar'];
+const VERBOS_APLIC = ['implementar', 'aplicar', 'ejecutar', 'impartir', 'poner', 'llevar', 'probar', 'testar', 'validar', 'medir', 'comprobar', 'analizar', 'investigar', 'evaluar', 'estudiar'];
+
+const LINEAS = [
+  'Herramientas para el trabajo colaborativo',
+  'Big Data aplicado a la educación',
+  'Protección de datos aplicada a procesos de innovación educativa',
+  'Mobile Learning aplicado a innovación educativa',
+  'Gamificación en contextos educativos/formativos',
+  'Creación de contenidos digitales',
+  'Emprendimiento educativo',
+  'Programación y/o robótica aplicada al proceso de aprendizaje',
+  'Neurociencia en el ámbito educativo y las TIC',
+  'Aprendizaje a través de Redes Sociales',
+  'Entornos Virtuales de enseñanza-aprendizaje (EVEA)',
+  'Uso de la IA en los procesos de innovación educativa'
+];
+/* Palabras que suelen reflejar cada línea (solo para un aviso informativo) */
+const LINEA_KW = [
+  ['colaborativ*', 'cooperativ*', 'trabajo en equipo'],
+  ['big data', 'datos', 'analitica*', 'learning analytics'],
+  ['proteccion de datos', 'privacidad', 'datos personales', 'rgpd'],
+  ['movil*', 'mobile', 'm-learning', 'app', 'aplicacion*', 'tablet*', 'tableta*', 'ipad', 'smartphone'],
+  ['gamific*', 'juego*', 'ludific*', 'escape room', 'breakout'],
+  ['contenido*', 'recurso* digital*', 'video*', 'podcast*', 'exelearning', 'genially', 'h5p'],
+  ['emprend*', 'empresa*', 'negocio*'],
+  ['programacion', 'robotica', 'robot*', 'scratch', 'pensamiento computacional', 'arduino', 'micro:bit'],
+  ['neuro*'],
+  ['redes sociales', 'instagram', 'tiktok', 'youtube', 'red social'],
+  ['entorno* virtual*', 'evea', 'moodle', 'plataforma*', 'aula virtual', 'lms', 'classroom'],
+  ['inteligencia artificial', 'ia', 'chatbot*', 'chatgpt', 'ia generativa']
+];
+
+/* ---------------------------------------------------------------------
+   EJEMPLOS POR LÍNEA DE TRABAJO
+   Se usan para orientar al alumnado en las casillas rellenables. El
+   índice coincide con LINEAS. Son ejemplos didácticos, no propuestas
+   oficiales ni herramientas recomendadas por la universidad.
+   --------------------------------------------------------------------- */
+const EJ_LINEA = [
+  { /* 1 · Trabajo colaborativo */
+    que: ['una secuencia colaborativa de seis sesiones', 'un proyecto de aula con roles y tareas compartidas'],
+    metodologia: ['aprendizaje cooperativo', 'aprendizaje basado en proyectos', 'tutoría entre iguales'],
+    tecnologia: ['documentos compartidos de Google Workspace', 'Padlet', 'Trello'],
+    finalidad: ['la participación equilibrada en el trabajo en equipo', 'la organización de tareas compartidas'],
+    area: ['Ciencias Sociales', 'Biología y Geología', 'Lengua Castellana'],
+    actividades: ['repartirá roles, planificará el trabajo en un tablero compartido y elaborará un producto común'],
+    producto: ['un producto común presentado al grupo'],
+    necesidad: ['el trabajo en grupo se reparte de forma desigual y no queda registro de quién hace qué']
+  },
+  { /* 2 · Big Data */
+    que: ['un panel de seguimiento del propio aprendizaje', 'una secuencia de alfabetización en datos de cuatro sesiones'],
+    metodologia: ['aprendizaje basado en retos', 'analítica del aprendizaje', 'indagación con datos'],
+    tecnologia: ['hojas de cálculo con datos abiertos', 'los informes de actividad de Moodle', 'Google Looker Studio'],
+    finalidad: ['la interpretación de datos y gráficos', 'el seguimiento del propio progreso'],
+    area: ['Matemáticas (estadística)', 'Economía', 'Geografía'],
+    actividades: ['recogerá datos, los representará en un panel y explicará qué observa'],
+    producto: ['un panel de datos comentado'],
+    necesidad: ['el alumnado maneja gráficos pero no interpreta lo que muestran']
+  },
+  { /* 3 · Protección de datos */
+    que: ['un itinerario formativo sobre privacidad de cuatro sesiones', 'un taller de identidad digital'],
+    metodologia: ['estudio de casos', 'aprendizaje basado en problemas', 'debate estructurado'],
+    tecnologia: ['los ajustes de privacidad de las plataformas que ya usan', 'simuladores de huella digital', 'formularios en línea'],
+    finalidad: ['el uso responsable de los datos personales', 'la conciencia sobre la huella digital'],
+    area: ['Educación en Valores Cívicos y Éticos', 'Tutoría', 'Tecnología y Digitalización'],
+    actividades: ['analizará casos reales, revisará la configuración de privacidad y elaborará un decálogo'],
+    producto: ['un decálogo de privacidad elaborado por el grupo'],
+    necesidad: ['el alumnado comparte datos personales en redes sin valorar las consecuencias']
+  },
+  { /* 4 · Mobile Learning */
+    que: ['una ruta didáctica con dispositivos móviles', 'una secuencia de aprendizaje ubicuo de cinco sesiones'],
+    metodologia: ['aprendizaje ubicuo', 'gymkana educativa', 'aula invertida'],
+    tecnologia: ['códigos QR', 'realidad aumentada en tableta', 'aplicaciones móviles de geolocalización'],
+    finalidad: ['la observación del entorno', 'la autonomía en el aprendizaje fuera del aula'],
+    area: ['Geografía e Historia', 'Educación Física', 'Ciencias de la Naturaleza'],
+    actividades: ['recorrerá puntos marcados con códigos QR y resolverá retos con la tableta'],
+    producto: ['una ruta compartida con el resto del centro'],
+    necesidad: ['el entorno del centro apenas se aprovecha como recurso de aprendizaje']
+  },
+  { /* 5 · Gamificación */
+    que: ['un escape room digital de cinco pruebas', 'una secuencia gamificada con narrativa y niveles'],
+    metodologia: ['gamificación', 'escape room educativo', 'aprendizaje basado en juegos'],
+    tecnologia: ['Genially', 'Classcraft', 'Kahoot', 'Wordwall'],
+    finalidad: ['la motivación hacia la lectura', 'el cálculo mental', 'el repaso de contenidos'],
+    area: ['Matemáticas', 'Lengua Castellana', 'Inglés'],
+    actividades: ['superará pruebas por niveles y desbloqueará pistas para resolver el reto final'],
+    producto: ['un reto final resuelto en equipo'],
+    necesidad: ['el repaso de contenidos se plantea siempre con las mismas fichas']
+  },
+  { /* 6 · Creación de contenidos digitales */
+    que: ['un taller de creación de pódcast de seis sesiones', 'una colección de vídeos elaborados por el alumnado'],
+    metodologia: ['aprendizaje por proyectos', 'producción audiovisual', 'aprender creando'],
+    tecnologia: ['Canva', 'H5P', 'editores de vídeo', 'herramientas de grabación de audio'],
+    finalidad: ['la expresión oral', 'la competencia digital creativa', 'la síntesis de contenidos'],
+    area: ['Lengua Castellana', 'Música', 'Ciencias Sociales'],
+    actividades: ['escribirá un guion, grabará su pieza y la publicará en el espacio del aula'],
+    producto: ['una publicación digital del grupo'],
+    necesidad: ['el alumnado consume contenidos digitales, pero apenas los produce']
+  },
+  { /* 7 · Emprendimiento educativo */
+    que: ['un itinerario de mini-empresa de ocho sesiones', 'un reto de diseño de un proyecto emprendedor'],
+    metodologia: ['aprendizaje basado en retos', 'design thinking', 'aprendizaje-servicio'],
+    tecnologia: ['Canva', 'hojas de cálculo', 'simuladores de empresa', 'tableros digitales'],
+    finalidad: ['la iniciativa personal y la toma de decisiones', 'el trabajo por objetivos'],
+    area: ['Economía y Emprendimiento', 'Tecnología y Digitalización', 'Formación Profesional'],
+    actividades: ['detectará una necesidad, diseñará una idea de negocio y la presentará'],
+    producto: ['una presentación del proyecto ante un público real'],
+    necesidad: ['el emprendimiento se trabaja de forma teórica, sin decisiones reales']
+  },
+  { /* 8 · Programación y robótica */
+    que: ['un reto de robótica de seis sesiones', 'una secuencia de programación por bloques'],
+    metodologia: ['pensamiento computacional', 'aprendizaje basado en retos', 'programación por parejas'],
+    tecnologia: ['Scratch', 'micro:bit', 'Arduino', 'robots educativos de suelo'],
+    finalidad: ['la resolución de problemas', 'el pensamiento computacional'],
+    area: ['Tecnología y Digitalización', 'Matemáticas', 'Ciencias de la Naturaleza'],
+    actividades: ['programará una solución por bloques, la probará y la depurará en equipo'],
+    producto: ['un prototipo programado y explicado por el equipo'],
+    necesidad: ['la robótica se limita a seguir instrucciones cerradas, sin resolver problemas']
+  },
+  { /* 9 · Neurociencia y TIC */
+    que: ['una secuencia de estudio con repaso espaciado', 'un programa de hábitos de atención de cuatro semanas'],
+    metodologia: ['práctica espaciada', 'evaluación formativa', 'estrategias metacognitivas'],
+    tecnologia: ['aplicaciones de tarjetas de repaso', 'mapas mentales digitales', 'cuestionarios de autoevaluación'],
+    finalidad: ['el recuerdo a largo plazo', 'la atención sostenida', 'la autorregulación del estudio'],
+    area: ['Tutoría', 'Biología y Geología', 'Historia'],
+    actividades: ['planificará sus repasos, se autoevaluará y registrará su progreso'],
+    producto: ['un plan de estudio personal revisado por el grupo'],
+    necesidad: ['el alumnado estudia de forma concentrada la víspera del examen y olvida los contenidos']
+  },
+  { /* 10 · Redes sociales */
+    que: ['un proyecto de divulgación en redes de seis sesiones', 'una campaña de comunicación del aula'],
+    metodologia: ['curación de contenidos', 'aprendizaje-servicio', 'proyecto de divulgación'],
+    tecnologia: ['una cuenta de aula en Instagram', 'TikTok', 'un blog del grupo'],
+    finalidad: ['la comunicación escrita en contextos reales', 'el pensamiento crítico ante los contenidos'],
+    area: ['Lengua Castellana', 'Biología y Geología', 'Historia'],
+    actividades: ['seleccionará fuentes, redactará publicaciones breves y valorará su alcance'],
+    producto: ['una campaña publicada y comentada en clase'],
+    necesidad: ['el alumnado usa redes a diario, pero no analiza cómo se construye la información']
+  },
+  { /* 11 · EVEA */
+    que: ['un aula virtual estructurada en cinco módulos', 'un curso en línea con itinerario y autoevaluación'],
+    metodologia: ['aula invertida', 'aprendizaje autorregulado', 'evaluación formativa continua'],
+    tecnologia: ['Moodle', 'Google Classroom', 'Microsoft Teams'],
+    finalidad: ['la autonomía en el estudio', 'el seguimiento del propio progreso'],
+    area: ['Formación Profesional', 'Inglés', 'Matemáticas'],
+    actividades: ['seguirá el itinerario del aula virtual, entregará tareas y consultará su progreso'],
+    producto: ['un itinerario completado con su registro de avance'],
+    necesidad: ['el aula virtual se usa solo como repositorio de archivos']
+  },
+  { /* 12 · Inteligencia artificial */
+    que: ['una secuencia de escritura asistida por IA', 'un itinerario de alfabetización en inteligencia artificial'],
+    metodologia: ['aprendizaje dialógico', 'evaluación formativa', 'análisis crítico de fuentes'],
+    tecnologia: ['asistentes de IA generativa', 'generadores de imágenes', 'chatbots educativos'],
+    finalidad: ['la revisión de los textos propios', 'el pensamiento crítico ante los contenidos generados'],
+    area: ['Lengua Castellana', 'Filosofía', 'Inglés'],
+    actividades: ['redactará un texto, lo contrastará con una respuesta generada por IA y justificará sus cambios'],
+    producto: ['un texto final con el registro de las decisiones tomadas'],
+    necesidad: ['el alumnado usa la IA para entregar tareas sin revisar ni contrastar lo que obtiene']
+  }
+];
+
+/* Persona gramatical según modalidad */
+const PERS = {
+  sing: { 'Diseño': 'Diseño', 'he': 'he', 'He': 'He', 'Considero': 'Considero', 'mi': 'mi', 'mi_f': 'mi', 'utilizo': 'utilizo', 'me': 'me' },
+  plur: { 'Diseño': 'Diseñamos', 'he': 'hemos', 'He': 'Hemos', 'Considero': 'Consideramos', 'mi': 'nuestro', 'mi_f': 'nuestra', 'utilizo': 'utilizamos', 'me': 'nos' }
+};
+
+/* Huecos rellenables: pregunta sencilla + ejemplo */
+const SLOTS = {
+  verbo: { etq: 'VERBO', q: '¿Qué vas a hacer con la propuesta?', sub: 'Verbo del objetivo', ej: 'diseñar · desarrollar · elaborar', opciones: VERBOS_OBJ, def: VERBO_DEF, ayuda: 'La ficha usa «diseñar». También puedes usar «desarrollar» o «elaborar». Evita «implementar» o «aplicar»: el TFM diseña la propuesta, no la lleva al aula.' },
+  que: { etq: 'QUÉ DISEÑAS', q: '¿Qué vas a diseñar exactamente?', sub: 'La propuesta, con su formato', ej: 'una secuencia didáctica gamificada · un itinerario de cinco sesiones · un aula virtual', ayuda: 'Nómbralo con un sustantivo: «una secuencia…», «un itinerario…», «un taller…», «un entorno…».' },
+  metodologia: { etq: 'METODOLOGÍA', q: '¿Cómo lo vas a plantear?', sub: 'Metodología o tipo de propuesta', ej: 'gamificación · aprendizaje basado en proyectos · aula invertida', ayuda: 'Escríbelo como sustantivo y en minúscula.' },
+  tecnologia: { etq: 'TECNOLOGÍA / RECURSO', q: '¿Qué tecnología o recurso digital usarás?', sub: 'Herramienta, aplicación o recurso', ej: 'Genially · realidad aumentada · herramientas de IA' },
+  finalidad: { etq: 'FINALIDAD EDUCATIVA', q: '¿Qué quieres mejorar en el aprendizaje?', sub: 'Lo que pretendes conseguir', ej: 'la comprensión lectora · la participación del alumnado', ayuda: 'Empieza por «la…», «el…» o «los…».' },
+  area: { etq: 'ÁREA / MATERIA', q: '¿En qué área, materia o temática?', sub: 'Asignatura o tema', ej: 'Matemáticas · Ciencias Sociales · Inglés' },
+  etapa: { etq: 'ETAPA Y CURSO', q: '¿Para quién es tu propuesta?', sub: 'Etapa y curso', ej: '5.º de Educación Primaria · 2.º de ESO' },
+  tipo_desc: { etq: 'QUÉ VAS A DISEÑAR', q: '¿Qué vas a diseñar exactamente?', sub: 'Tipo de propuesta y su tamaño', ej: 'una secuencia de seis sesiones de ABP · un escape room digital' },
+  actividades: { etq: 'QUÉ HARÁ EL ALUMNADO', q: '¿Qué hará el alumnado?', sub: 'Escríbelo en futuro', ej: 'investigará el patrimonio de su localidad y elaborará una ruta', ayuda: 'Usa verbos en futuro: «investigará», «creará», «resolverá».' },
+  recursos: { etq: 'QUÉ UTILIZARÁ', q: '¿Qué verá o utilizará el alumnado?', sub: 'Materiales y recursos', ej: 'fichas de investigación y una aplicación de realidad aumentada' },
+  producto: { etq: 'EXPERIENCIA O PRODUCTO FINAL', q: '¿Con qué terminará la propuesta?', sub: 'Producto o experiencia final', ej: 'una presentación final a las familias' },
+  necesidad: { etq: 'NECESIDAD DETECTADA', q: '¿Qué problema o necesidad has observado?', sub: 'Situación educativa de partida', ej: 'el patrimonio local se trabaja de forma expositiva' },
+  respuesta: { etq: 'POR QUÉ PUEDE AYUDAR', q: '¿Por qué tu propuesta puede ayudar?', sub: 'Con expresiones prudentes', ej: 'el ABP y la realidad aumentada pueden favorecer un aprendizaje activo', ayuda: 'Usa «puede favorecer», «pretende», «podría». No prometas resultados.' },
+  motivacion: { etq: 'MOTIVACIÓN PERSONAL', q: '¿Por qué has elegido este tema?', sub: 'Tu experiencia o interés', ej: 'en mi práctica docente uso la realidad aumentada y me interesa su valor didáctico' }
+};
+
+/* ---------------------------------------------------------------------
+   APARTADOS DE LA FICHA (numeración oficial)
+   --------------------------------------------------------------------- */
+const SEC = {
+  titulo: {
+    num: 3, nombre: 'Título provisional del trabajo', corto: 'Título',
+    limite: { max: 20, min: 0, tipo: 'obligatorio' },
+    ficha: 'Título provisional del trabajo (indicando en máximo 20 palabras, tipo de trabajo, temática, personas destinatarias y aspecto tecnológico. Ejemplo: «Proyecto sobre gamificación de las Matemáticas en el aula de 3.º de Primaria a través de eXeLearning»).',
+    guia: 'El título es tu objetivo en versión corta. En una sola línea debe quedar claro qué vas a diseñar, sobre qué, para quién y con qué tecnología.',
+    contiene: ['Tipo de trabajo o metodología (proyecto, gamificación, ABP…)', 'Temática o área', 'Personas destinatarias (etapa y curso)', 'Aspecto tecnológico (herramienta o recurso)'],
+    evita: ['Empezar por un verbo («Diseñar…», «Mejorar…»)', 'Verbos conjugados («mejora», «permite»…)', 'Superar las 20 palabras', 'Títulos genéricos sin destinatarios ni tecnología'],
+    anatomia: [
+      { et: 'QUÉ', q: 'Tipo de trabajo o metodología', slots: ['metodologia'] },
+      { et: 'SOBRE QUÉ', q: 'Temática o área', slots: ['area'] },
+      { et: 'PARA QUIÉN', q: 'Etapa y curso', slots: ['etapa'] },
+      { et: 'CON QUÉ', q: 'Tecnología o recurso', slots: ['tecnologia'] }
+    ],
+    preguntas: ['metodologia', 'area', 'etapa', 'tecnologia', 'finalidad'],
+    plantillas: [
+      { nombre: 'Plantilla A · empieza por la metodología', t: '{metodologia} con {tecnologia} para {finalidad} en {area} de {etapa}', cuando: 'Úsala cuando tu propuesta se basa en una metodología clara (gamificación, ABP, aula invertida…). Es la estructura de la presentación de coordinación.' },
+      { nombre: 'Plantilla B · empieza por «Proyecto sobre…»', t: 'Proyecto sobre {metodologia} en {area} para {etapa} a través de {tecnologia}', cuando: 'Úsala si quieres que el tipo de trabajo aparezca de forma explícita, como en el ejemplo de la ficha. No incluye la finalidad, así que ahorra palabras.' }
+    ],
+    ejemplo: { texto: 'Gamificación con Genially para la comprensión lectora en Lengua Castellana de 2.º de Primaria', notas: ['Empieza por un sustantivo', 'Sin verbos conjugados', '14 de 20 palabras'] },
+    consejos: ['Piensa el título como tu objetivo en versión corta.', 'Empieza por un sustantivo: «Gamificación…», «Aprendizaje basado en proyectos…», «Proyecto…».', 'Si ya lo sabes, nombra la herramienta concreta (Genially, realidad aumentada, Moodle…).'],
+    errores: [
+      { mal: 'Diseñar un Genially para mejorar las matemáticas', por: 'Empieza por un verbo, no dice a quién va dirigido y confunde la herramienta con el proyecto.', bien: 'Gamificación con Genially para el cálculo mental en Matemáticas de 3.º de Primaria' },
+      { mal: 'La realidad aumentada en la escuela', por: 'Es demasiado general: no indica el tipo de trabajo, la temática concreta ni los destinatarios.', bien: 'Aprendizaje basado en proyectos con realidad aumentada para el estudio del entorno en Ciencias Naturales de 1.º de ESO' },
+      { mal: 'Cómo la inteligencia artificial mejora la escritura de los alumnos', por: 'Lleva un verbo conjugado («mejora»), promete un resultado y suena a pregunta de investigación.', bien: 'Uso de la inteligencia artificial para la escritura creativa en Lengua Castellana de 6.º de Primaria' }
+    ]
+  },
+  objetivo: {
+    num: 4, nombre: 'Objetivo general de la propuesta', corto: 'Objetivo',
+    limite: { max: 50, min: 0, tipo: 'obligatorio' },
+    ficha: 'Objetivo general de la propuesta (describe en máximo 50 palabras lo que se pretende conseguir con ella. Debe comenzar por: «El objetivo general de la propuesta es diseñar un proyecto de innovación tecnológica para mejorar…»).',
+    nota: 'La ficha propone esa fórmula, pero también se admite empezar directamente por el verbo en infinitivo («Diseñar…», «Desarrollar…», «Elaborar…»). Lo que no puede faltar son las cuatro piezas: qué, cómo, para quién y para qué.',
+    guia: 'Un objetivo general es una sola frase que responde a cuatro preguntas: QUÉ diseñas, CÓMO lo haces, PARA QUIÉN y PARA QUÉ. Puedes empezar con la fórmula de la ficha («El objetivo general de la propuesta es diseñar…») o directamente con el verbo en infinitivo («Diseñar…»). No describas todavía las actividades: eso va en la descripción.',
+    contiene: ['Un verbo de diseño: diseñar, desarrollar o elaborar', 'QUÉ: la propuesta que vas a diseñar', 'CÓMO: metodología y tecnología', 'PARA QUIÉN: etapa, curso y, si procede, área', 'PARA QUÉ: la finalidad educativa'],
+    evita: ['Verbos de aplicación («implementar», «aplicar»)', 'Verbos de investigación («analizar», «medir», «comprobar»)', 'Listas de actividades', 'Prometer resultados («aumentará las notas»)', 'Varias frases con varios objetivos'],
+    anatomia: [
+      { et: 'QUÉ', q: 'Qué vas a diseñar', slots: ['verbo', 'que'] },
+      { et: 'CÓMO', q: 'Con qué metodología y tecnología', slots: ['metodologia', 'tecnologia'] },
+      { et: 'PARA QUIÉN', q: 'A quién va dirigido', slots: ['etapa', 'area'] },
+      { et: 'PARA QUÉ', q: 'Qué quieres mejorar', slots: ['finalidad'] }
+    ],
+    preguntas: ['verbo', 'que', 'metodologia', 'tecnologia', 'etapa', 'area', 'finalidad'],
+    plantillas: [
+      { nombre: 'Plantilla A · la fórmula de la ficha', t: '{INI1} {verbo} {INI2} {finalidad} en {area} de {etapa}, mediante {metodologia} con {tecnologia}.', cuando: 'La más segura: reproduce la fórmula que aparece en la ficha. Úsala si quieres un objetivo corto y directo.' },
+      { nombre: 'Plantilla B · qué, cómo, para quién y para qué', t: '{INI1} {verbo} {que} a partir de {metodologia} y {tecnologia}, para el alumnado de {etapa} en {area}, con el fin de mejorar {finalidad}.', cuando: 'La más completa: nombra lo que vas a diseñar y ordena las cuatro piezas. Úsala cuando ya sabes qué producto vas a diseñar.' },
+      { nombre: 'Plantilla C · empieza por el verbo en infinitivo', t: '{verbo} {que} a partir de {metodologia} y {tecnologia}, para el alumnado de {etapa} en {area}, con el fin de mejorar {finalidad}.', cuando: 'Formulación clásica de objetivos: empieza directamente por el infinitivo, sin frase introductoria. Es la que ahorra más palabras.' },
+      { nombre: 'Plantilla D · centrada en el alumnado', t: '{INI1} {verbo} {INI2} {finalidad} del alumnado de {etapa} en el área de {area}, a través de {metodologia} y {tecnologia}.', cuando: 'Úsala si lo que quieres mejorar se refiere claramente al alumnado: su motivación, su comprensión, su participación.' }
+    ],
+    ejemplos: [
+      { titulo: 'Con la fórmula de la ficha', texto: 'El objetivo general de la propuesta es diseñar un proyecto de innovación tecnológica para mejorar la comprensión lectora en Lengua Castellana de 2.º de Primaria, mediante gamificación con Genially.', notas: ['Fórmula literal de la ficha', 'Qué, cómo, para quién y para qué', '29 de 50 palabras'] },
+      { titulo: 'Empezando por el infinitivo', texto: 'Diseñar una secuencia didáctica gamificada a partir de la narrativa de juego y de Genially, para el alumnado de 2.º de Educación Primaria en Lengua Castellana, con el fin de mejorar la comprensión lectora.', notas: ['Empieza por el verbo en infinitivo', 'Nombra qué se diseña', '33 de 50 palabras'] }
+    ],
+    consejos: ['Un objetivo general, una sola frase. Si te salen dos objetivos, quédate con el principal.', 'Usa un verbo de diseño: diseñar, desarrollar o elaborar. Evita «implementar» y «aplicar»: el TFM diseña la propuesta, no la lleva al aula.', 'Antes de copiarlo, comprueba las cuatro piezas: qué, cómo, para quién y para qué.'],
+    errores: [
+      { mal: 'Mejorar los resultados de 4.º de Primaria con realidad aumentada.', por: 'Empieza por la finalidad y no por un verbo de diseño: no dice qué se diseña ni con qué metodología, y promete un resultado que no puede demostrarse.', bien: 'Diseñar un itinerario de aprendizaje basado en proyectos con realidad aumentada, para el alumnado de 4.º de Primaria en Ciencias Sociales, con el fin de mejorar el conocimiento del entorno.' },
+      { mal: '…para mejorar la motivación: primero verán un vídeo, después harán un Kahoot y al final crearán un mural.', por: 'Es una lista de actividades. Las actividades se explican en la descripción.', bien: '…para mejorar la motivación hacia la lectura del alumnado de 3.º de ESO en el área de Lengua Castellana y Literatura, a través de la gamificación y Kahoot.' },
+      { mal: 'Implementar en el aula de 3.º de ESO una secuencia con Kahoot y comprobar que mejora las calificaciones.', por: 'Usa un verbo de aplicación y promete resultados medibles. El TFM diseña la propuesta: no la implementa ni mide sus efectos.', bien: 'Diseñar una secuencia gamificada con Kahoot para el alumnado de 3.º de ESO en Lengua Castellana, con el fin de mejorar la motivación hacia la lectura.' }
+    ]
+  },
+  descripcion: {
+    num: 5, nombre: 'Breve descripción de la propuesta', corto: 'Descripción',
+    limite: { max: 100, min: 40, tipo: 'orientativo' },
+    ficha: 'Breve descripción de la propuesta (describe en unas 100 palabras lo que pretendes diseñar. Recuerda que no lo implementarás, pero sí debes diseñarlo de forma completa).',
+    guia: 'Explica cómo será lo que vas a diseñar: qué utilizará el alumnado, qué hará y con qué terminará la propuesta. No lo implementarás, pero debes diseñarlo de forma completa.',
+    contiene: ['Qué verá o utilizará el alumnado', 'Qué actividades realizará', 'Qué recurso o experiencia final encontrará', 'Verbos en futuro («incluirá», «realizará»)'],
+    evita: ['Afirmar resultados («mejoró», «aumentó»)', 'Decir que lo llevarás a cabo en tu aula', 'Descripciones genéricas sin actividades concretas'],
+    preguntas: ['tipo_desc', 'etapa', 'actividades', 'recursos', 'producto'],
+    plantillas: [
+      { nombre: 'Plantilla A · en primera persona', t: '{Diseño} {tipo_desc} para el alumnado de {etapa}. A lo largo de la propuesta, el alumnado {actividades}. Incluirá {recursos} y finalizará con {producto}.', cuando: 'Directa y personal, como el ejemplo de la presentación de coordinación.' },
+      { nombre: 'Plantilla B · impersonal', t: 'La propuesta consistirá en {tipo_desc} para {etapa}. El alumnado {actividades}, utilizando {recursos}. Como cierre, se realizará {producto}.', cuando: 'Úsala si prefieres un tono más formal, sin primera persona.' }
+    ],
+    ejemplo: { texto: '{Diseño} un itinerario gamificado de seis sesiones para el alumnado de 2.º de Primaria. A lo largo de la propuesta, el alumnado leerá relatos breves, resolverá retos de comprensión y conseguirá insignias por cada misión superada. Incluirá un tablero interactivo en Genially, fichas de lectura y una rúbrica de autoevaluación, y finalizará con la creación de un cuento colectivo que se compartirá con las familias.', notas: ['Qué utilizará, qué hará y con qué terminará el alumnado', 'Escrito en futuro', 'Unas 65 palabras'] },
+    consejos: ['Escribe en futuro: «incluirá», «realizará», «elaborará».', 'Responde a tres preguntas: qué utilizará, qué hará y con qué terminará el alumnado.', 'Usa expresiones prudentes: «puede favorecer», «pretende».'],
+    errores: [
+      { mal: 'Con esta propuesta el alumnado mejoró su motivación y aumentó sus resultados.', por: 'Afirma resultados de una propuesta que no se ha implementado.', bien: 'La propuesta pretende favorecer la motivación del alumnado mediante retos semanales en Genially.' },
+      { mal: 'Voy a implementar el proyecto en mi aula durante el segundo trimestre.', por: 'El TFM es un diseño: no afirmes que lo llevarás a cabo en un aula real.', bien: 'Diseño una secuencia de seis sesiones en la que el alumnado…' },
+      { mal: 'Usaré muchas herramientas digitales para que las clases sean más dinámicas.', por: 'Es demasiado general: no dice qué hará el alumnado ni con qué recursos concretos.', bien: 'El alumnado resolverá retos semanales en un tablero de Genially y elaborará un mapa digital del barrio.' }
+    ]
+  },
+  justificacion: {
+    num: 6, nombre: 'Justificación y motivación personal', corto: 'Justificación',
+    limite: { max: 100, min: 40, tipo: 'orientativo' },
+    ficha: 'Justificación y motivación personal (describe en unas 100 palabras por qué has elegido este tema y trabajo).',
+    guia: 'Explica por qué diseñas esta propuesta: qué necesidad educativa has detectado, por qué tu propuesta puede responder a ella y por qué has elegido este tema.',
+    contiene: ['Necesidad, problema o situación educativa detectada', 'Por qué la propuesta puede dar una respuesta adecuada', 'Tu motivación personal por el tema'],
+    evita: ['Motivaciones genéricas («me gusta la tecnología»)', 'Afirmaciones absolutas («está demostrado que…»)', 'Necesidades administrativas en lugar de necesidades de aprendizaje'],
+    preguntas: ['necesidad', 'respuesta', 'motivacion'],
+    plantillas: [
+      { nombre: 'Plantilla A · empieza por la necesidad', t: '{Diseño} esta propuesta porque {he} observado que {necesidad}. {Considero} que {respuesta}. {He} elegido este tema porque {motivacion}.', cuando: 'Úsala si has observado una necesidad concreta en un aula o centro.' },
+      { nombre: 'Plantilla B · empieza por la motivación', t: '{He} elegido este tema porque {motivacion}. En {mi} contexto educativo se observa que {necesidad}. Por ello, esta propuesta pretende dar respuesta a esta situación, ya que {respuesta}.', cuando: 'Úsala si tu punto de partida es tu experiencia o tu interés profesional.' }
+    ],
+    ejemplo: { texto: '{Diseño} esta propuesta porque {he} observado que parte del alumnado de 2.º de Primaria muestra poco interés por la lectura y dificultades para comprender textos breves. {Considero} que la gamificación y los recursos interactivos pueden favorecer una lectura más activa y motivadora. {He} elegido este tema porque en {mi_f} práctica docente {utilizo} Genially y {me} interesa conocer mejor su potencial didáctico.', notas: ['Necesidad detectada', 'Por qué la propuesta responde a ella', 'Motivación personal'] },
+    consejos: ['Parte de una necesidad concreta que hayas observado o que sea propia del contexto.', 'Explica por qué tu propuesta puede ayudar con expresiones prudentes («puede favorecer»).', 'Incluye tu motivación: la ficha pregunta por qué has elegido este tema y trabajo.'],
+    errores: [
+      { mal: 'Elegí este tema porque me gusta la tecnología.', por: 'Solo da una motivación genérica: falta la necesidad educativa y por qué la propuesta responde a ella.', bien: 'He observado que… Considero que… He elegido este tema porque en mi práctica docente…' },
+      { mal: 'Está demostrado que la gamificación mejora siempre el rendimiento.', por: 'Es una afirmación absoluta que no puedes sostener en una ficha.', bien: 'La gamificación puede favorecer la participación del alumnado…' },
+      { mal: 'Es necesario digitalizar la gestión de las guardias del centro.', por: 'Es una necesidad administrativa, no de aprendizaje: es el motivo de rechazo más frecuente.', bien: 'Parte del alumnado muestra dificultades para…' }
+    ]
+  }
+};
+const ORDEN_TEXTOS = ['titulo', 'objetivo', 'descripcion', 'justificacion'];
+
+/* ---------------------------------------------------------------------
+   MODALIDADES
+   --------------------------------------------------------------------- */
+const MODOS = {
+  individual: {
+    nombre: 'Individual', icono: '👤', persona: 'sing',
+    quien: 'Una sola persona, sobre una de las líneas de trabajo propuestas.',
+    extension: 'Entre 30 y 40 páginas, sin contar portada, resumen, abstract, índice y anexos.',
+    defensa: 'Individual: 15 minutos de exposición y 15 minutos de retroalimentación del tribunal.',
+    antes: [
+      { id: 'i1', t: 'Voy a elaborar el TFM de forma individual.', crit: true },
+      { id: 'i2', t: 'Mi propuesta encaja en una de las 12 líneas de trabajo.', crit: true },
+      { id: 'i3', t: 'Voy a diseñar una innovación educativa, no a hacer una investigación.', crit: true },
+      { id: 'i4', t: 'En mi propuesta alguien aprende algo: no es una herramienta de gestión del centro.', crit: true },
+      { id: 'i5', t: 'Conozco el plazo: del ' + CONV.apertura + ' al ' + CONV.cierre + '.', crit: false }
+    ],
+    modalidad: [
+      { id: 'm1', t: 'Marcaré «Individual» en «1. Modalidad».', crit: true }
+    ],
+    modalidadNota: 'Los campos «nombre de tus compañeros» y «compromiso grupal» son para otras modalidades: en individual no los necesitas.',
+    docs: []
+  },
+  grupal: {
+    nombre: 'Grupal', icono: '👥', persona: 'plur',
+    quien: 'Un grupo de 2 o 3 personas, sobre una de las líneas de trabajo propuestas.',
+    extension: 'Entre 60 y 80 páginas, sin contar portada, resumen, abstract, índice y anexos.',
+    defensa: 'Grupal: 30 minutos de exposición y 15 minutos de retroalimentación del tribunal.',
+    aviso: 'Si el compromiso no está firmado por todos los miembros o no se adjunta en la plataforma, la solicitud se rechazará.',
+    antes: [
+      { id: 'g1', t: 'Somos 2 o 3 miembros.', crit: true },
+      { id: 'g2', t: 'Hemos incluido a todos los integrantes (sus nombres irán en la ficha).', crit: true },
+      { id: 'g3', t: 'Tenemos preparado el compromiso grupal (se descarga en «Ficheros descargables del formulario»).', crit: true },
+      { id: 'g4', t: 'El compromiso incluye a todos los miembros y está firmado por todos.', crit: true },
+      { id: 'g5', t: 'Adjuntaremos el compromiso en la plataforma (PDF, DOC, DOCX o ZIP, máximo 50 MB).', crit: true },
+      { id: 'g6', t: 'La propuesta tiene sentido como trabajo grupal (60–80 páginas).', crit: false },
+      { id: 'g7', t: 'Conocemos el plazo: del ' + CONV.apertura + ' al ' + CONV.cierre + '.', crit: false }
+    ],
+    modalidad: [
+      { id: 'm1', t: 'Marcaré «Grupal» en «1. Modalidad».', crit: true },
+      { id: 'm2', t: 'Escribiré el nombre de todos mis compañeros en «En caso de modalidad GRUPAL, indica el nombre de tus compañeros».', crit: true },
+      { id: 'm3', t: 'Adjuntaré el compromiso grupal, firmado por todos, en «En caso de modalidad grupal, adjuntar el compromiso grupal cumplimentado».', crit: true }
+    ],
+    modalidadNota: 'Revisad entre todos que no falta ningún nombre ni ninguna firma antes de enviar.',
+    docs: ['g3', 'g4', 'g5', 'm3']
+  },
+  proyectum: {
+    nombre: 'Red Proyectum', icono: '🏫', persona: 'plur',
+    quien: 'Un grupo (la presentación de coordinación indica 3 personas) sobre una propuesta ya formulada por un centro educativo. Se elige entre las propuestas del centro.',
+    extension: 'Entre 60 y 80 páginas, sin contar portada, resumen, abstract, índice y anexos.',
+    defensa: 'Grupal: 30 minutos de exposición y 15 minutos de retroalimentación del tribunal.',
+    aviso: 'El compromiso («Compromiso grupal / Red Proyectum») debe estar firmado por todos los miembros y adjuntarse en la plataforma.',
+    antes: [
+      { id: 'p1', t: 'He leído el briefing de nuestra propuesta en el aula de TFM.', crit: true },
+      { id: 'p2', t: 'Hemos elegido una de las cuatro propuestas del centro (márcala abajo).', crit: true },
+      { id: 'p3', t: 'Formamos el grupo (la presentación de coordinación indica 3 personas).', crit: true },
+      { id: 'p4', t: 'Tenemos el compromiso «Compromiso grupal / Red Proyectum» cumplimentado y firmado por todos.', crit: true },
+      { id: 'p5', t: 'Lo adjuntaremos en la plataforma (PDF, DOC, DOCX o ZIP, máximo 50 MB).', crit: true },
+      { id: 'p6', t: 'Nuestra ficha responderá al objetivo y a los requisitos del briefing, sin cambiar el tema.', crit: true },
+      { id: 'p7', t: 'Conocemos el plazo: del ' + CONV.apertura + ' al ' + CONV.cierre + '.', crit: false }
+    ],
+    modalidad: [
+      { id: 'm1', t: 'Marcaré «Red Proyectum» en «1. Modalidad».', crit: true },
+      { id: 'm2', t: 'Adjuntaré el compromiso «Compromiso grupal / Red Proyectum», firmado por todos.', crit: true }
+    ],
+    modalidadNota: 'El campo de compañeros de la ficha está rotulado «En caso de modalidad GRUPAL». Si dudáis sobre si rellenarlo en Red Proyectum, consultadlo en el foro de dudas antes de enviar.',
+    docs: ['p4', 'p5', 'm2']
+  }
+};
+
+/* ---------------------------------------------------------------------
+   BRIEFINGS DE RED PROYECTUM (Colegio Base International School)
+   --------------------------------------------------------------------- */
+const BRIEFINGS = {
+  electricidad: {
+    nombre: 'Propuesta gamificada sobre electricidad', icono: '⚡',
+    asignatura: 'Tecnología y Digitalización', etapa: '2.º y 3.º de ESO (Comunidad de Madrid)',
+    objetivo: 'Crear una propuesta gamificada para enseñar y aprender electricidad en Tecnología y Digitalización, aplicable a la vez en 2.º y 3.º de ESO.',
+    enfoque: 'Debe asegurar la adquisición de los conceptos eléctricos y la mejora de las destrezas matemáticas asociadas a los problemas eléctricos.',
+    requisitos: ['Narrativa atractiva, uso de códigos QR y actividades que impliquen salir del aula', 'Lenguaje claro para 2.º de ESO', 'Entre cinco y seis horas de duración (ampliables)', 'Actividades individuales y grupales', 'Apta para iPad', 'Banco de problemas por niveles, mostrados al azar y resueltos siempre de forma individual', 'Mínimo de problemas correctos antes de pasar de nivel', 'Información, evidencias y gráficas de evolución para alumnado y profesorado'],
+    prefill: { que: 'una propuesta gamificada sobre electricidad', metodologia: 'gamificación', finalidad: 'el aprendizaje de la electricidad', area: 'Tecnología y Digitalización', etapa: '2.º y 3.º de ESO', tecnologia: 'códigos QR' },
+    tema: ['electric*'], lineaSugerida: 4,
+    claves: [
+      { kw: ['narrativa', 'historia', 'mision*', 'aventura'], t: 'una narrativa atractiva' },
+      { kw: ['qr'], t: 'el uso de códigos QR' },
+      { kw: ['fuera del aula', 'salir del aula', 'patio', 'exterior', 'fuera de clase'], t: 'actividades fuera del aula' },
+      { kw: ['problema*', 'ejercicio*', 'nivel*'], t: 'el banco de problemas por niveles' }
+    ],
+    consejo: 'Recordad que el briefing pide dos cosas a la vez: los conceptos eléctricos y las destrezas matemáticas asociadas.'
+  },
+  emprendimiento: {
+    nombre: 'Autogestión del conocimiento sobre la puesta en marcha de un negocio o empresa', icono: '💼',
+    asignatura: 'Economía y Emprendimiento', etapa: '4.º de ESO (Comunidad de Madrid)',
+    objetivo: 'Crear una herramienta para la autogestión del conocimiento sobre la puesta en marcha de una empresa, vinculada al trabajo práctico «Crea tu empresa».',
+    enfoque: 'La herramienta solo permite avanzar en el trabajo práctico cuando el alumnado ha adquirido los conocimientos teóricos de cada uno de los 17 apartados.',
+    requisitos: ['Lenguaje claro para 4.º de ESO', 'Tiempo adecuado de autoevaluación', 'Información y evidencias para docente y alumnado por apartado', 'Apta para iPad', 'Banco de al menos 25 preguntas tipo test (4 respuestas) por apartado; se muestran 10 al azar', 'Se supera con 6 o más aciertos de 10 y se desbloquea el apartado', 'Tras tres intentos fallidos, el apartado se bloquea y se avisa al docente, que puede desbloquearlo', 'Gráficas de evolución, tiempo invertido y agrupación de respuestas'],
+    prefill: { que: 'una herramienta de autogestión del conocimiento', metodologia: 'autoevaluación con desbloqueo progresivo', finalidad: 'la autogestión del conocimiento sobre la puesta en marcha de una empresa', area: 'Economía y Emprendimiento', etapa: '4.º de ESO' },
+    tema: ['empresa*', 'negocio*', 'emprend*'], lineaSugerida: 6,
+    claves: [
+      { kw: ['crea tu empresa'], t: 'el trabajo práctico «Crea tu empresa»' },
+      { kw: ['test*', 'cuestionario*', 'preguntas', 'desbloque*'], t: 'los test que desbloquean cada apartado' }
+    ],
+    consejo: 'Destacad el aprendizaje: la herramienta sirve para que el alumnado compruebe y consolide lo que sabe antes de avanzar.'
+  },
+  atl: {
+    nombre: 'Autoevaluación de la adquisición de los enfoques del aprendizaje (ATL)', icono: '🧭',
+    asignatura: 'Inglés (PAI)', etapa: '1.º de ESO (Programa de los Años Intermedios)',
+    objetivo: 'Crear una herramienta de autoevaluación de la adquisición de los enfoques del aprendizaje en Inglés que contemple también si se aplican explícitamente en el aula.',
+    enfoque: 'Autoevaluación inicial y final en cada trimestre sobre cuatro ATL: pensamiento crítico, organización personal, trabajo en equipo y comunicación escrita.',
+    requisitos: ['Preguntas sobre si la práctica docente incluye explícitamente los ATL', 'Lenguaje claro para 1.º de ESO', 'Tiempo adecuado para mantener la atención', 'Información individualizada para docente, alumno y familia', 'Apta para iPad', 'Acumular información que puedan contrastar distintos docentes', 'Gráficas de evolución y agrupación de respuestas para el profesorado'],
+    prefill: { que: 'una herramienta de autoevaluación de los enfoques del aprendizaje', metodologia: 'autoevaluación', finalidad: 'la adquisición de los enfoques del aprendizaje (ATL)', area: 'Inglés', etapa: '1.º de ESO (PAI)' },
+    tema: ['enfoques del aprendizaje', 'enfoques de aprendizaje', 'atl'], lineaSugerida: null,
+    claves: [
+      { kw: ['autoevaluacion', 'autoevaluar*'], t: 'la autoevaluación inicial y final' },
+      { kw: ['atl', 'enfoques del aprendizaje', 'enfoques de aprendizaje'], t: 'los cuatro enfoques del aprendizaje' },
+      { kw: ['trimestr*'], t: 'su uso en cada trimestre' }
+    ],
+    consejo: 'El briefing indica que es el alumnado, y no el profesorado, quien evalúa la adquisición de estas habilidades.'
+  },
+  planes: {
+    nombre: 'Herramienta para coordinar planes de mejora individuales para el alumnado', icono: '🧩',
+    asignatura: 'Asignaturas del PAI', etapa: 'ESO (Programa de los Años Intermedios)',
+    objetivo: 'Analizar y mejorar la herramienta existente para coordinar los planes de mejora individuales del alumnado que no supera criterios de evaluación del PAI.',
+    enfoque: 'Los planes de mejora analizan barreras y necesidades y trazan metas verificables para andamiar el aprendizaje, desde el Diseño Universal para el Aprendizaje (DUA).',
+    requisitos: ['Respetar el marco teórico del DUA', 'Facilitar el volcado de información del profesorado', 'Sistema de visualización para el seguimiento de los planes', 'Diseño adaptativo', 'Comparativas trimestrales, semestrales y anuales, individuales y grupales', 'Parte de la herramienta actual (formulario de Google Forms y hoja de cálculo)'],
+    prefill: { que: 'una herramienta de coordinación de planes de mejora individuales', metodologia: 'el DUA', finalidad: 'la coordinación de los planes de mejora individuales del alumnado', area: 'las asignaturas del PAI', etapa: 'ESO' },
+    tema: ['plan de mejora', 'planes de mejora'], lineaSugerida: null,
+    claves: [
+      { kw: ['dua', 'diseno universal'], t: 'el marco del DUA' },
+      { kw: ['visualiza*', 'seguimiento', 'grafic*', 'panel'], t: 'la visualización para el seguimiento' },
+      { kw: ['google forms', 'formulario', 'hoja de calculo', 'herramienta existente', 'herramienta actual'], t: 'que partís de la herramienta existente' }
+    ],
+    consejo: 'Poned el foco en el aprendizaje del alumnado (barreras, andamiaje, DUA). Si la ficha suena a gestión de datos, puede leerse como una herramienta administrativa, que es el motivo de rechazo más frecuente.'
+  }
+};
+
+const PASOS = [
+  { id: 'antes', et: 'Antes de empezar' },
+  { id: 'datos', et: 'Datos personales' },
+  { id: 'modalidad', et: '1 · Modalidad' },
+  { id: 'area', et: '2 · Área de trabajo' },
+  { id: 'titulo', et: '3 · Título' },
+  { id: 'objetivo', et: '4 · Objetivo general' },
+  { id: 'descripcion', et: '5 · Descripción' },
+  { id: 'justificacion', et: '6 · Justificación' },
+  { id: 'final', et: 'Revisión final' }
+];
+
+/* ---------------------------------------------------------------------
+   PREGUNTAS FRECUENTES (cat: comun | individual | grupal | proyectum)
+   --------------------------------------------------------------------- */
+const FAQ = [
+  { cat: 'comun', q: '¿Enviar el formulario significa que mi propuesta está aprobada?', a: 'No. El envío no implica la aprobación. La coordinación solo da una aceptación provisional y es tu director o directora de TFM quien acepta, afina o redirige definitivamente la propuesta.' },
+  { cat: 'comun', sec: ['descripcion', 'objetivo'], q: '¿Tengo que implementar el proyecto?', a: 'No. Vas a diseñar la propuesta de forma completa, pero no la implementarás. Por eso no debes afirmar que la llevarás a un aula real ni que has mejorado, aumentado o conseguido resultados.' },
+  { cat: 'comun', q: '¿Cuántas palabras puede tener cada apartado?', a: 'Título: máximo 20 palabras. Objetivo general: máximo 50 palabras. Breve descripción: unas 100 palabras. Justificación y motivación personal: unas 100 palabras.' },
+  { cat: 'comun', sec: ['objetivo'], q: '¿Cómo debe empezar el objetivo general?', a: 'Tienes dos formas válidas. Puedes usar la fórmula de la ficha, «' + PREFIJO + '…», o empezar directamente por el verbo en infinitivo: «Diseñar…». En los dos casos, el objetivo debe dejar claras las cuatro piezas: qué diseñas, cómo, para quién y para qué.' },
+  { cat: 'comun', sec: ['objetivo'], q: '¿Puedo utilizar «desarrollar» o «elaborar» en lugar de «diseñar»?', a: 'Sí. Los tres son verbos de diseño y sirven para el objetivo general. Lo que debes evitar son los verbos de aplicación («implementar», «aplicar») y los de investigación («analizar», «medir», «comprobar»): el TFM consiste en diseñar la propuesta de forma completa, no en llevarla a un aula real ni en medir sus efectos.' },
+  { cat: 'comun', sec: ['objetivo'], q: '¿Qué cuatro piezas debe tener el objetivo?', a: 'QUÉ: la propuesta que vas a diseñar (una secuencia, un itinerario, un aula virtual…). CÓMO: la metodología y la tecnología. PARA QUIÉN: la etapa, el curso y, si procede, el área. PARA QUÉ: la finalidad educativa, es decir, qué quieres mejorar. Todo en una sola frase de 50 palabras como máximo.' },
+  { cat: 'comun', sec: ['objetivo', 'descripcion'], q: '¿Qué diferencia hay entre el objetivo y la descripción?', a: 'El objetivo dice qué pretendes conseguir, en una frase: qué diseñas, cómo, para quién, con qué y para qué. La descripción explica cómo será la propuesta: qué utilizará, qué hará y con qué terminará el alumnado.' },
+  { cat: 'comun', sec: ['justificacion'], q: '¿Qué debo poner en la justificación?', a: 'Qué necesidad, problema o situación educativa has detectado, por qué tu propuesta puede dar una respuesta adecuada y por qué has elegido este tema y trabajo (tu motivación personal).' },
+  { cat: 'comun', sec: ['titulo'], q: '¿Qué información debe aparecer en el título?', a: 'Tipo de trabajo, temática, personas destinatarias y aspecto tecnológico, en un máximo de 20 palabras. Empieza por un sustantivo y no uses verbos conjugados.' },
+  { cat: 'comun', q: '¿Por qué se puede rechazar una propuesta?', a: 'Por la formulación (el objetivo está mal formulado o no sigue la estructura), por el alcance (tema demasiado general o ambicioso para un TFM), por el enfoque (se plantea como una investigación y no como el diseño de una innovación) o por una viabilidad irreal (se afirma que se implementará en un aula real). El motivo más frecuente es proponer algo que no es pedagógico.' },
+  { cat: 'comun', q: '¿Puedo proponer una herramienta para gestionar el centro?', a: 'No. Herramientas para gestionar matrículas, controlar ausencias del profesorado u organizar guardias y turnos pueden ser útiles, pero en ellas nadie aprende nada. Tu TFM debe ser una innovación educativa.' },
+  { cat: 'comun', q: '¿Qué condiciones debe cumplir la propuesta?', a: 'Tres a la vez. Tecnológica: hay tecnología educativa con una función didáctica real. Innovadora: aporta algo que no está resuelto en ese contexto. Pedagógica: alguien aprende algo; es la condición crítica.' },
+  { cat: 'comun', q: '¿Cuál es el plazo para enviar la solicitud?', a: 'Del ' + CONV.apertura + ' al ' + CONV.cierre + '. El plazo es improrrogable: las solicitudes presentadas fuera de plazo no serán consideradas.' },
+  { cat: 'comun', q: '¿Cuántas veces puedo enviar el formulario?', a: 'Solo puedes enviarlo una vez. Antes, guarda borrador y revisa. Si la coordinación lo marca como «Rechazado», tendrás que completarlo de nuevo y volver a enviarlo.' },
+  { cat: 'comun', q: '¿Qué significan «Rechazado» y «Aceptado provisional»?', a: '«Rechazado»: se ha enviado, pero la coordinación ha detectado algún dato que hay que completar o modificar; debes completarlo de nuevo y enviarlo otra vez. «Aceptado provisional»: se ha enviado correctamente y la coordinación lo ha recibido y aceptado.' },
+  { cat: 'comun', q: '¿Dónde veo el estado de mi solicitud?', a: 'Desde «Resultado de actividades». Los estados del formulario son: Pendiente, Borrador y Enviado.' },
+  { cat: 'comun', q: '¿Dónde pregunto mis dudas?', a: 'En el foro de dudas generales para la gestión del TFE, que se cierra el día que finaliza el plazo para presentar el formulario.' },
+  { cat: 'comun', sec: ['area'], q: '¿Cómo se asigna el director o directora?', a: 'A cada estudiante se le asigna un aula virtual y un director o directora según la línea de trabajo elegida.' },
+  { cat: 'comun', q: '¿Esta herramienta aprueba mi ficha?', a: 'No. Solo comprueba de forma automática algunos elementos (palabras, estructura, expresiones). La decisión corresponde a la coordinación y a tu director o directora.' },
+  { cat: 'comun', q: '¿Esta herramienta guarda mis textos en algún servidor?', a: 'No. No necesitas cuenta y no se envía nada. Tu borrador se guarda solo en este navegador para que no lo pierdas; puedes borrarlo cuando quieras con «Borrar mis datos».' },
+  { cat: 'comun', q: '¿Tengo que escribir aquí mis datos personales?', a: 'No. El correo, el teléfono, el documento de identidad y el país o provincia se rellenan directamente en la plataforma oficial.' },
+  { cat: 'individual', q: '¿Cómo es el TFM individual?', a: 'Lo elabora una sola persona sobre una de las líneas de trabajo. Extensión: entre 30 y 40 páginas, sin contar portada, resumen, abstract, índice y anexos. Defensa individual: 15 minutos de exposición y 15 minutos de retroalimentación del tribunal.' },
+  { cat: 'individual', q: '¿Tengo que rellenar el campo de compañeros o adjuntar un compromiso?', a: 'No. Esos campos son para la modalidad grupal (el compromiso, también para Red Proyectum).' },
+  { cat: 'grupal', q: '¿Cuántos miembros puede tener el grupo?', a: 'Entre 2 y 3 miembros.' },
+  { cat: 'grupal', q: '¿Tenemos que adjuntar el compromiso?', a: 'Sí. Descargadlo en «Ficheros descargables del formulario» (Compromiso grupal / Red Proyectum), cumplimentadlo, firmadlo todos los miembros y adjuntadlo en la plataforma (PDF, DOC, DOCX o ZIP, máximo 50 MB).' },
+  { cat: 'grupal', q: '¿Qué pasa si falta el compromiso o no lo firman todos?', a: 'La solicitud se rechazará. Comprobad que aparecen y firman todos los integrantes antes de enviar.' },
+  { cat: 'grupal', q: '¿Qué ponemos en «nombre de tus compañeros»?', a: 'El nombre de todos tus compañeros de grupo. Revisad que no falta nadie.' },
+  { cat: 'grupal', q: '¿Cómo es el TFM grupal?', a: 'Extensión: entre 60 y 80 páginas, sin contar portada, resumen, abstract, índice y anexos. Defensa grupal: 30 minutos de exposición y 15 minutos de retroalimentación del tribunal.' },
+  { cat: 'grupal', q: '¿Escribimos en singular o en plural?', a: 'Consejo: al ser un trabajo grupal, resulta más coherente escribir en plural («diseñamos», «hemos observado»). Las plantillas de esta modalidad ya lo hacen.' },
+  { cat: 'grupal', q: '¿Tiene que enviar la solicitud cada miembro del grupo?', a: 'Los materiales en los que se basa esta herramienta no lo especifican. Consultadlo en el foro de dudas antes de enviar.' },
+  { cat: 'proyectum', q: '¿Qué es Red Proyectum?', a: 'Un TFM elaborado en grupo (la presentación de coordinación indica 3 personas) sobre una propuesta ya formulada por una institución. Se elige entre las propuestas del centro. Extensión: entre 60 y 80 páginas. Defensa grupal: 30 minutos de exposición y 15 de retroalimentación.' },
+  { cat: 'proyectum', q: '¿Dónde encuentro el briefing?', a: 'En el aula de TFM. El briefing contiene la información sobre la propuesta que debéis desarrollar.' },
+  { cat: 'proyectum', q: '¿Qué propuestas hay en esta convocatoria?', a: 'Propuesta gamificada sobre electricidad; autogestión del conocimiento sobre la puesta en marcha de un negocio o empresa; autoevaluación de la adquisición de enfoques de aprendizaje; y herramienta para coordinar planes de mejora individuales para el alumnado.' },
+  { cat: 'proyectum', q: '¿Podemos cambiar el tema del briefing?', a: 'El tema está definido por el briefing. Vuestra ficha debe responder a su objetivo, a sus destinatarios y a sus requisitos.' },
+  { cat: 'proyectum', q: '¿Qué ventajas tiene Red Proyectum?', a: 'Experiencia real, certificado de participación, más facilidad para trabajar en equipo, una sesión extra para explicar el briefing, ahorro de tiempo (el tema está definido y tenéis la información de partida) y la oportunidad de presentarlo al centro educativo.' },
+  { cat: 'proyectum', q: '¿Necesitamos compromiso?', a: 'Sí. El fichero descargable «Compromiso grupal / Red Proyectum» se cumplimenta en caso grupal o Red Proyectum. Debe estar firmado por todos los miembros y adjuntarse en la plataforma.' },
+  { cat: 'proyectum', sec: ['area'], q: '¿Qué línea de trabajo marcamos?', a: 'Los briefings no indican qué línea marcar. Elegid la que mejor describa la propuesta y, si tenéis dudas, consultadlo en el foro.' },
+  { cat: 'proyectum', q: '¿Tenemos que incluir en la ficha todos los requisitos del briefing?', a: 'Consejo: la ficha es breve. Conviene que se reconozcan el tema, los destinatarios y los elementos principales del briefing; el diseño completo se desarrolla en el TFM.' }
+];
+
+/* =====================================================================
+   REGLAS DE REVISIÓN (sin IA: palabras clave, estructura y contadores)
+   ===================================================================== */
+function norm(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[º°ª]/g, 'o').replace(/\s+/g, ' ').trim(); }
+/* Normalización que conserva posiciones (para mostrar el fragmento original) */
+function nx(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[º°ª]/g, 'o'); }
+function contarPalabras(s) { const t = String(s || '').trim(); if (!t) return 0; return t.split(/\s+/).filter(w => /[0-9A-Za-zÀ-ÿ]/.test(w)).length; }
+function escRx(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+function kw(list) {
+  const parts = list.map(k => { const stem = k.endsWith('*'); const b = escRx(norm(stem ? k.slice(0, -1) : k)); return '\\b' + b + (stem ? '' : '\\b'); });
+  return new RegExp(parts.join('|'));
+}
+function hallar(texto, rx) {
+  const t = String(texto || ''); const m = nx(t).match(rx);
+  if (!m) return null;
+  let end = m.index + m[0].length;
+  while (end < t.length && /[A-Za-zÀ-ÿ]/.test(t.charAt(end))) end++;
+  return t.slice(m.index, end);
+}
+function E(s, t) { return { s: s, t: t }; }
+function uniq(a) { return a.filter((x, i) => a.indexOf(x) === i); }
+
+const RX = {
+  tech: kw(['digital*', 'tecnolog*', 'app', 'apps', 'aplicacion*', 'realidad aumentada', 'realidad virtual', 'realidad mixta', 'inteligencia artificial', 'ia', 'ia generativa', 'chatbot*', 'genially', 'exelearning', 'moodle', 'canva', 'padlet', 'kahoot', 'quizizz', 'classcraft', 'scratch', 'minecraft', 'robot*', 'programacion', 'codigo* qr', 'qr', 'plataforma*', 'entorno* virtual*', 'evea', 'tablet*', 'tableta*', 'ipad*', 'movil*', 'mobile', 'smartphone*', 'videojuego*', 'podcast*', 'video*', 'redes sociales', 'instagram', 'tiktok', 'youtube', 'big data', 'analitica*', 'dashboard*', 'software', 'web', 'blog*', 'wiki*', 'simulador*', 'impresion 3d', 'impresora 3d', 'arduino', 'micro:bit', 'microbit', 'metaverso', 'google', 'forms', 'hoja de calculo', 'hojas de calculo', 'excel', 'drive', 'teams', 'classroom', 'h5p', 'edpuzzle', 'mentimeter', 'wordwall', 'tic', 'online', 'en linea', 'e-learning', 'elearning', 'lms', 'thinglink', 'book creator', 'notebooklm', 'chatgpt', 'gemini', 'copilot', 'herramienta* digital*', 'recurso* digital*', 'ordenador*', 'pizarra digital', 'lego', 'makey', 'tinkercad', 'geogebra', 'mapa* interactivo*', 'interactiv*', 'gafas vr']),
+  etapa: kw(['infantil', 'primaria', 'eso', 'secundaria', 'bachillerato', 'fp', 'formacion profesional', 'ciclo formativo', 'grado medio', 'grado superior', 'universidad', 'universitari*', 'docentes', 'profesorado', 'adultos', 'educacion especial', 'pai', 'educacion basica', 'educacion media', 'preescolar', 'escuela de adultos']),
+  tipoMet: kw(['proyecto*', 'propuesta*', 'gamific*', 'aprendizaje basado', 'abp', 'flipped', 'aula invertida', 'clase invertida', 'cooperativ*', 'colaborativ*', 'escape room', 'breakout', 'storytelling', 'narrativa*', 'design thinking', 'aprendizaje-servicio', 'aprendizaje servicio', 'visual thinking', 'dua', 'diseno universal', 'microlearning', 'mobile learning', 'm-learning', 'steam', 'stem', 'secuencia*', 'situacion* de aprendizaje', 'unidad didactica', 'unidades didacticas', 'itinerario*', 'programa*', 'taller*', 'pensamiento computacional', 'rutinas de pensamiento', 'autoevaluacion', 'evaluacion formativa', 'portafolio*', 'eportfolio*', 'estaciones', 'rincones', 'juego* de rol', 'simulacion*', 'indagacion', 'aprendizaje por descubrimiento', 'reto*', 'mision*', 'aprendizaje adaptativo', 'autorregulacion', 'metacognicion', 'aprendizaje activo', 'metodologia*', 'uso de', 'herramienta*', 'recurso*', 'plan*', 'guia*', 'tutoria entre iguales', 'aprendizaje personalizado', 'ludific*', 'juego*']),
+  producto: kw(['proyecto*', 'propuesta*', 'secuencia*', 'unidad didactica', 'unidades didacticas', 'situacion* de aprendizaje', 'itinerario*', 'programa*', 'plan*', 'taller*', 'curso*', 'aula virtual', 'aulas virtuales', 'entorno*', 'espacio*', 'recurso*', 'material*', 'escape room', 'breakout', 'gymkana*', 'ruta*', 'panel*', 'tablero*', 'guia*', 'repositorio*', 'coleccion*', 'app', 'aplicacion*', 'juego*', 'videojuego*', 'podcast*', 'blog*', 'web*', 'campana*', 'reto*', 'prototipo*', 'modulo*', 'actividad*', 'experiencia*', 'intervencion*', 'formacion*', 'curso en linea', 'mooc', 'portafolio*', 'eportfolio*', 'cuaderno*', 'kit*', 'banco de recursos', 'situacion*']),
+  metodo: kw(['gamific*', 'aprendizaje basado', 'abp', 'flipped', 'aula invertida', 'clase invertida', 'cooperativ*', 'colaborativ*', 'escape room', 'breakout', 'storytelling', 'narrativa*', 'design thinking', 'aprendizaje-servicio', 'aprendizaje servicio', 'visual thinking', 'dua', 'diseno universal', 'microlearning', 'mobile learning', 'm-learning', 'steam', 'stem', 'secuencia*', 'situacion* de aprendizaje', 'unidad didactica', 'itinerario*', 'pensamiento computacional', 'rutinas de pensamiento', 'autoevaluacion', 'evaluacion formativa', 'portafolio*', 'eportfolio*', 'estaciones', 'rincones', 'juego* de rol', 'simulacion*', 'indagacion', 'aprendizaje por descubrimiento', 'reto*', 'mision*', 'aprendizaje adaptativo', 'autorregulacion', 'metacognicion', 'aprendizaje activo', 'metodologia*', 'estrategia*', 'enfoque*', 'tutoria entre iguales', 'aprendizaje personalizado', 'ludific*', 'juego*', 'desbloqueo', 'taller*', 'proyecto*']),
+  area: kw(['matematic*', 'lengua*', 'literatura', 'lectura', 'lector*', 'escritura', 'ingles', 'frances', 'aleman', 'idioma*', 'ciencias', 'naturales', 'sociales', 'historia', 'geografia', 'fisica', 'quimica', 'biologia', 'geologia', 'tecnologia y digitalizacion', 'tecnologia', 'musica', 'educacion fisica', 'plastica', 'arte*', 'artistica', 'dibujo', 'filosofia', 'economia', 'emprend*', 'religion', 'valores', 'ciudadania', 'convivencia', 'emocion*', 'sostenib*', 'medio ambiente', 'patrimonio', 'salud', 'alimentacion', 'igualdad', 'inclusion', 'diversidad', 'orientacion', 'tutoria', 'competencia digital', 'alfabetizacion*', 'electricidad', 'programacion', 'robotica', 'cientific*', 'calculo', 'geometria', 'fracciones', 'ortografia', 'vocabulario', 'comprension', 'expresion', 'oralidad', 'latin', 'griego', 'informatica', 'digitalizacion', 'lenguaje', 'conocimiento del medio', 'entorno', 'asignatura*', 'materia*', 'modulo*', 'area de', 'enfoques del aprendizaje', 'atl', 'planes de mejora', 'pai', 'empresa*']),
+  conj: kw(['es', 'son', 'voy', 'vamos', 'quiero', 'queremos', 'pretendo', 'pretende', 'pretendemos', 'busca', 'buscan', 'buscamos', 'permite', 'permiten', 'permitira', 'mejorara', 'mejoran', 'ayudara', 'favorece', 'favorecera', 'aprenden', 'aprenderan', 'utiliza', 'utilizan', 'utilizara', 'consiste', 'hago', 'haremos', 'trabajan', 'crean', 'fomenta', 'fomentara', 'desarrolla', 'desarrollara', 'mejoro', 'aumenta']),
+  admin: /\bmatricul|\bausencias del profesorado|\bcontrol (de|del) (personal|ausencias|asistencia del profesorado)|\bguardias\b|\bturnos (del|de) (colegio|centro|profesorado)|\bgestion administrativa|\bhorarios? del profesorado|\bgestion de (matriculas|personal|horarios|guardias)/,
+  investigacion: /\b(estudiar|analizar|evaluar|medir|investigar|comprobar|conocer) (el|la|los|las) (impacto|efecto|efectos|eficacia|influencia|relacion|incidencia)\b|\bcomprobar si\b|\bestudio de caso\b|\bpasar una encuesta\b|\bhipotesis\b/,
+  implementa: /\b(implementare|implementaremos|voy a implementar|vamos a implementar|aplicare en|aplicaremos en|pondre en practica|pondremos en practica|llevare a cabo|llevaremos a cabo|se implementara|sera implementad[oa]|pilotare|pilotaremos|en mi aula real|implementarlo|implementarla|e implementar)\b/,
+  futuro: /(^|[^a-záéíóúüñ])[a-záéíóúüñ]+(ará|erá|irá|arán|erán|irán|aré|eré|iré|aremos|eremos|iremos)(?=$|[^a-záéíóúüñ])/i,
+  pasadoRes: /(^|[^a-záéíóúüñ])(mejoró|aumentó|consiguió|logró|incrementó|redujo|mejoraron|aumentaron|consiguieron|lograron|demostró|demostraron)(?=$|[^a-záéíóúüñ])/i,
+  compRes: /\b(he|hemos|ha|han) (mejorado|aumentado|conseguido|logrado|demostrado|incrementado|comprobado|reducido)\b|\blos resultados (muestran|mostraron|demuestran|indican|confirman)\b|\besta (demostrado|probado)\b|\bgarantiz\w*|\bsin duda\b/,
+  conjAcento: /(^|[^a-záéíóúüñ])(está|están|será|serán)(?=$|[^a-záéíóúüñ])/i,
+  alumnado: kw(['alumnado', 'alumno*', 'alumna*', 'estudiante*', 'nino*', 'nina*', 'discente*', 'participante*', 'aprendiz*', 'docente*', 'profesorado', 'grupo', 'clase']),
+  actividades: kw(['actividad*', 'tarea*', 'reto*', 'mision*', 'sesion*', 'fase*', 'dinamica*', 'juego*', 'prueba*', 'ejercicio*', 'problema*', 'investigara*', 'elaborara*', 'creara*', 'realizara*', 'resolvera*', 'disenara*', 'participara*', 'trabajara*', 'grabara*', 'presentara*', 'construira*', 'leera*', 'escribira*', 'completara*', 'respondera*', 'explorara*', 'test', 'cuestionario*', 'autoevaluacion']),
+  necesidad: kw(['necesidad*', 'problema*', 'dificultad*', 'carencia*', 'falta de', 'escas*', 'baj*', 'poca', 'poco', 'desmotiv*', 'observad*', 'observa*', 'detect*', 'limitad*', 'brecha', 'desinteres', 'abandono', 'situacion', 'expositiv*', 'reto*', 'demanda*', 'mejorable']),
+  respuesta: kw(['puede*', 'podria*', 'podra*', 'pretende*', 'permitir*', 'permite*', 'favorec*', 'contribu*', 'ayud*', 'responde*', 'dar respuesta', 'facilit*', 'promov*', 'potenci*', 'considero', 'consideramos', 'creo', 'creemos']),
+  primeraSing: kw(['mi', 'me', 'he', 'elijo', 'elegi', 'considero', 'creo', 'como docente', 'como maestro', 'como maestra', 'como profesor', 'como profesora', 'mi experiencia', 'trabajo', 'observe', 'yo', 'diseno esta', 'utilizo', 'uso']),
+  primeraPlur: kw(['nuestro*', 'nuestra*', 'nos', 'hemos', 'elegimos', 'consideramos', 'creemos', 'como docentes', 'observamos', 'disenamos', 'utilizamos', 'trabajamos']),
+  absolutos: /\bsiempre\b|\bnunca\b|\btodos los alumnos\b|\bsin duda\b|\besta demostrado\b|\bes evidente\b|\bgarantiz\w*/,
+  otraEtapa: /\b(infantil|primaria|bachillerato|universidad|universitari\w*|fp|formacion profesional)\b/
+};
+
+const VERBOS_INF = ['disenar', 'crear', 'desarrollar', 'mejorar', 'fomentar', 'implementar', 'elaborar', 'aplicar', 'utilizar', 'usar', 'promover', 'potenciar', 'favorecer', 'trabajar', 'aprender', 'ensenar', 'gamificar', 'hacer', 'construir', 'analizar', 'evaluar', 'investigar', 'estudiar', 'conocer', 'motivar', 'incorporar', 'integrar', 'introducir', 'optimizar', 'facilitar', 'programar', 'descubrir', 'explorar', 'impulsar', 'reforzar', 'despertar', 'acercar', 'aumentar', 'lograr', 'conseguir', 'garantizar', 'desarrollo'].filter(v => v !== 'desarrollo');
+const NOMINAL = { disenar: 'Diseño de', crear: 'Creación de', desarrollar: 'Desarrollo de', mejorar: 'Mejora de', fomentar: 'Fomento de', implementar: 'Implementación de', elaborar: 'Elaboración de', aplicar: 'Aplicación de', utilizar: 'Uso de', usar: 'Uso de', promover: 'Promoción de', potenciar: 'Potenciación de', gamificar: 'Gamificación de', integrar: 'Integración de', incorporar: 'Incorporación de', introducir: 'Introducción de', evaluar: 'Evaluación de', analizar: 'Análisis de', ensenar: 'Enseñanza de', aprender: 'Aprendizaje de', construir: 'Construcción de', programar: 'Programación de', impulsar: 'Impulso de', reforzar: 'Refuerzo de', optimizar: 'Optimización de', explorar: 'Exploración de', investigar: 'Investigación de', estudiar: 'Estudio de' };
+
+/* Ejemplos de un hueco, adaptados a la línea de trabajo elegida */
+function ejemplosSlot(slot, linea) {
+  const S0 = SLOTS[slot]; if (!S0) return [];
+  const L = (linea != null && EJ_LINEA[linea]) ? EJ_LINEA[linea][slot] : null;
+  if (L && L.length) return L.slice(0, 3);
+  return String(S0.ej || '').split(' · ').filter(Boolean).slice(0, 3);
+}
+
+function recortar(t, n) { const w = String(t).trim().replace(/[.,;:\s]+$/, '').split(/\s+/); return w.length <= (n || 8) ? w.join(' ') : w.slice(0, n || 8).join(' ') + '…'; }
+
+function primeraPalabraNorm(t) { return norm(t).split(' ')[0].replace(/[^a-z]/g, ''); }
+
+function implementaAfirmado(t) {
+  const n = norm(t); const m = RX.implementa.exec(n);
+  if (!m) return null;
+  const antes = n.slice(Math.max(0, m.index - 14), m.index);
+  if (/\bno\b/.test(antes) || /\bsin\b/.test(antes)) return null;
+  return m[0];
+}
+
+function itemLongitud(sec, t) {
+  const L = SEC[sec].limite, w = contarPalabras(t);
+  if (L.tipo === 'obligatorio') return w <= L.max ? E('ok', w + '/' + L.max + ' palabras (máximo obligatorio).') : E('err', w + '/' + L.max + ' palabras: has superado el máximo obligatorio de ' + L.max + ' palabras.');
+  if (w > L.max) return E('warn', w + '/' + L.max + ' palabras: has superado la extensión recomendada (la ficha indica unas ' + L.max + ' palabras).');
+  if (w < L.min) return E('warn', w + '/' + L.max + ' palabras: puede quedarse corto; la ficha indica unas ' + L.max + ' palabras.');
+  return E('ok', w + '/' + L.max + ' palabras (extensión orientativa).');
+}
+
+function chequeosComunes(t, ctx, sec) {
+  const out = []; const n = norm(t);
+  const ph = t.match(/\[[^\]]{2,40}\]/g);
+  if (ph) out.push(E('err', 'Quedan huecos sin completar: ' + uniq(ph).join(', ') + '. Sustitúyelos por tu información.'));
+  if (RX.admin.test(n)) out.push(E('err', 'Parece una herramienta de gestión administrativa (matrículas, guardias, ausencias…). Es el motivo de rechazo más frecuente: la propuesta debe ser pedagógica, alguien tiene que aprender algo.'));
+  const r1 = t.match(RX.pasadoRes); const r2 = n.match(RX.compRes);
+  if (r1 || r2) out.push(E('err', 'Afirmas un resultado («' + (r1 ? r1[2] : r2[0]) + '»). La propuesta no se implementa, así que no puedes afirmar que mejora, garantiza o consigue algo. Usa expresiones prudentes: «puede favorecer», «pretende».'));
+  const imp = implementaAfirmado(t);
+  if (imp) out.push(E('err', 'Das a entender que lo implementarás («' + imp + '»). El TFM es un diseño: afirmar que se aplicará en un aula real es un motivo de rechazo (viabilidad irreal).'));
+  if (RX.investigacion.test(n)) out.push(E('warn', 'Parece planteado como una investigación (estudiar o medir el impacto, comprobar si…). El TFM es el diseño de una innovación educativa.'));
+  if (ctx && ctx.modo === 'proyectum' && ctx.briefing && BRIEFINGS[ctx.briefing] && (sec === 'titulo' || sec === 'objetivo')) {
+    const b = BRIEFINGS[ctx.briefing];
+    if (!kw(b.tema).test(nx(t))) out.push(E('warn', 'No reconocemos el tema del briefing («' + b.nombre.toLowerCase() + '»). Comprueba que se identifica claramente.'));
+    const oe = n.match(RX.otraEtapa);
+    if (oe) out.push(E('warn', 'Mencionas «' + oe[0] + '», pero el briefing se dirige a ' + b.etapa + '.'));
+  }
+  return out;
+}
+
+/* Avisos finales comunes del objetivo */
+function finalesObjetivo(limpio, nt, ctx) {
+  const out = [];
+  if (/[.!?]\s+[A-ZÁÉÍÓÚÑ]/.test(limpio)) out.push(E('warn', 'Tiene más de una frase. El objetivo general se formula mejor en una sola frase.'));
+  const nAct = (nx(limpio).match(new RegExp(RX.actividades.source, 'g')) || []).length;
+  if (nAct >= 3 || /\b(primero|despues|a continuacion|finalmente|por ultimo)\b/.test(nt)) out.push(E('warn', 'Parece una lista de actividades. Las actividades van en la descripción; aquí expresa qué pretendes conseguir.'));
+  if (ctx && ctx.linea != null && LINEA_KW[ctx.linea] && !kw(LINEA_KW[ctx.linea]).test(nx(limpio))) out.push(E('info', 'Has marcado la línea «' + LINEAS[ctx.linea] + '». Revisa que el objetivo refleje esa línea.'));
+  return out;
+}
+
+const REV = {
+  titulo: function (t, ctx) {
+    const out = [itemLongitud('titulo', t)];
+    const w1 = t.trim().split(/\s+/)[0].replace(/^[«"“']+/, '');
+    const p = primeraPalabraNorm(t.replace(/^[«"“'\s]+/, ''));
+    if (VERBOS_INF.indexOf(p) >= 0) out.push(E('err', 'Empieza por un verbo («' + w1 + '»). El título empieza por un sustantivo' + (NOMINAL[p] ? ': prueba con «' + NOMINAL[p] + '…».' : '.')));
+    else out.push(E('ok', 'No empieza por un verbo en infinitivo.'));
+    const c = hallar(t, RX.conj) || ((t.match(RX.conjAcento) || [])[2]);
+    if (c) out.push(E('warn', 'Posible verbo conjugado: «' + c + '». El título no debe llevar verbos conjugados.'));
+    else out.push(E('ok', 'No detectamos verbos conjugados.'));
+    const tm = hallar(t, RX.tipoMet);
+    out.push(tm ? E('ok', 'Tipo de trabajo o metodología: «' + tm + '».') : E('warn', 'No identificamos el tipo de trabajo o la metodología (proyecto, gamificación, ABP…).'));
+    const ar = hallar(t, RX.area);
+    out.push(ar ? E('ok', 'Temática: «' + ar + '».') : E('warn', 'No identificamos la temática o el área. Comprueba que se entiende sobre qué trata.'));
+    const et = detectaEtapa(t);
+    out.push(et ? E('ok', 'Personas destinatarias: «' + et + '».') : E('warn', 'No identificamos a las personas destinatarias (etapa y curso).'));
+    const te = hallar(t, RX.tech);
+    out.push(te ? E('ok', 'Aspecto tecnológico: «' + te + '».') : E('warn', 'No identificamos el aspecto tecnológico (herramienta, aplicación o recurso digital).'));
+    if (/\.\s*$/.test(t)) out.push(E('warn', 'Los títulos no llevan punto final.'));
+    if (/^\s*[«"“]|[»"”]\s*$/.test(t)) out.push(E('warn', 'Quita las comillas: en la plataforma se escribe solo el título.'));
+    if (ctx && ctx.linea != null && LINEA_KW[ctx.linea] && !kw(LINEA_KW[ctx.linea]).test(nx(t))) out.push(E('info', 'Has marcado la línea «' + LINEAS[ctx.linea] + '». Revisa que el título refleje esa línea.'));
+    return out;
+  },
+  objetivo: function (t, ctx) {
+    const out = [itemLongitud('objetivo', t)];
+    const limpio = t.trim().replace(/\s+/g, ' ');
+    const nt = norm(limpio);
+    const w0 = limpio.split(' ')[0].replace(/^[«"“']+/, '');
+    const p0 = primeraPalabraNorm(limpio);
+    const RX_FORM = /^el objetivo( general)?( de (la|esta|mi|nuestra) propuesta| de (este|mi|nuestro) (trabajo|tfm|proyecto))? (es|sera|consiste en) ([a-z]+)\b/;
+    const mF = nt.match(RX_FORM);
+    let resto = limpio, verbo = null;
+    if (mF) {
+      verbo = mF[7];
+      resto = limpio.split(' ').slice(mF[0].split(' ').length).join(' ');
+      if (VERBOS_DISENO.indexOf(verbo) >= 0) out.push(E('ok', 'Empieza con la fórmula de la ficha y un verbo de diseño.'));
+      else if (VERBOS_APLIC.indexOf(verbo) >= 0) out.push(E('err', 'El verbo «' + verbo + '» es de aplicación o de investigación. El TFM diseña la propuesta: usa «diseñar», «desarrollar» o «elaborar».'));
+      else out.push(E('warn', 'Empieza con la fórmula de la ficha, pero no reconocemos el verbo. Usa «diseñar», «desarrollar» o «elaborar».'));
+    } else if (VERBOS_DISENO.indexOf(p0) >= 0) {
+      verbo = p0;
+      resto = limpio.split(' ').slice(1).join(' ');
+      out.push(E('ok', 'Empieza por un verbo de diseño en infinitivo («' + w0 + '»). Es una de las formas admitidas.'));
+    } else if (VERBOS_APLIC.indexOf(p0) >= 0) {
+      out.push(E('err', 'Empieza por «' + w0 + '»: es un verbo de aplicación o de investigación. El TFM diseña la propuesta, no la implementa ni la evalúa.'));
+    } else {
+      out.push(E('err', 'No identificamos la formulación. Empieza por «' + PREFIJO + '…» o directamente por el verbo en infinitivo («Diseñar…»).'));
+    }
+    if (verbo && VERBOS_OBJ.map(norm).indexOf(verbo) < 0 && VERBOS_DISENO.indexOf(verbo) >= 0) {
+      out.push(E('info', 'Has usado «' + verbo + '». Se entiende, pero los verbos habituales en esta ficha son «diseñar», «desarrollar» y «elaborar».'));
+    }
+    /* La fórmula de la ficha ya nombra el proyecto y anuncia la finalidad */
+    const formulaFicha = /^(un|una)\s+(proyecto|propuesta)\s+de\s+innovaci[oó]n\s+(tecnol[oó]gica|tecnoeducativa|educativa)/i.test(resto);
+    if (formulaFicha) resto = resto.replace(/^(un|una)\s+(proyecto|propuesta)\s+de\s+innovaci[oó]n\s+\S+\s*/i, '');
+    const anunciaMejora = /\b(para|que)\s+mejorar?e?\b/i.test(limpio.slice(0, limpio.length - resto.length)) || /^para mejorar\b/i.test(resto);
+    if (/^para mejorar\b/i.test(resto)) resto = resto.replace(/^para mejorar\s*/i, '');
+    /* QUÉ */
+    const qu = formulaFicha ? 'proyecto de innovación tecnológica' : hallar(resto, RX.producto);
+    out.push(qu ? E('ok', 'Qué diseñas: «' + qu + '».') : E('warn', 'No identificamos qué vas a diseñar. Nómbralo: un proyecto, una secuencia, un itinerario, un taller, un aula virtual…'));
+    /* CÓMO */
+    const restoMet = (qu && !formulaFicha) ? resto.replace(qu, ' ') : resto;
+    const me = hallar(restoMet, RX.metodo);
+    out.push(me ? E('ok', 'Cómo (metodología o estrategia): «' + me + '».') : E('warn', 'No identificamos la metodología o la estrategia (¿cómo?).'));
+    const te = hallar(resto, RX.tech);
+    out.push(te ? E('ok', 'Con qué (tecnología o recurso): «' + te + '».') : E('warn', 'No identificamos la tecnología o el recurso (¿con qué?).'));
+    /* PARA QUIÉN */
+    const et = detectaEtapa(resto);
+    out.push(et ? E('ok', 'Para quién: «' + et + '».') : E('warn', 'No identificamos a quién va dirigido (etapa y curso).'));
+    const ar = hallar(resto, RX.area);
+    if (!ar) out.push(E('info', 'Si procede, indica el área o materia.'));
+    /* PARA QUÉ */
+    if (anunciaMejora && contarPalabras(resto) >= 2) {
+      out.push(E('ok', 'Para qué (finalidad educativa): «' + recortar(resto) + '».'));
+      if (VERBOS_INF.indexOf(primeraPalabraNorm(resto)) >= 0) out.push(E('warn', 'Después de «mejorar» aparece otro verbo («' + resto.split(' ')[0] + '»). Escribe lo que quieres mejorar: «la comprensión lectora…».'));
+      return out.concat(finalesObjetivo(limpio, nt, ctx));
+    }
+    const mFin = limpio.match(/\b(para\s+(?:mejorar|favorecer|fomentar|reforzar|potenciar|desarrollar|promover|impulsar)|con el fin de(?:\s+mejorar)?|con el objetivo de(?:\s+mejorar)?|a fin de(?:\s+mejorar)?|orientad[oa] a)\s+(.+)$/i);
+    if (mFin && contarPalabras(mFin[2]) >= 2) {
+      out.push(E('ok', 'Para qué (finalidad educativa): «' + recortar(mFin[2]) + '».'));
+      if (VERBOS_INF.indexOf(primeraPalabraNorm(mFin[2])) >= 0 && /mejorar/i.test(mFin[1])) out.push(E('warn', 'Después de «mejorar» aparece otro verbo («' + mFin[2].split(' ')[0] + '»). Escribe lo que quieres mejorar: «la comprensión lectora…».'));
+    } else {
+      out.push(E('err', 'Falta la finalidad educativa. Añade para qué lo diseñas: «…para mejorar…» o «…con el fin de mejorar…».'));
+    }
+    return out.concat(finalesObjetivo(limpio, nt, ctx));
+  },
+  descripcion: function (t, ctx) {
+    const out = [itemLongitud('descripcion', t)];
+    out.push(RX.futuro.test(t) ? E('ok', 'Está escrita en futuro («incluirá», «realizará»…).') : E('warn', 'No detectamos verbos en futuro. Escribe lo que incluirá la propuesta: «incluirá», «realizará».'));
+    out.push(hallar(t, RX.alumnado) ? E('ok', 'Se menciona al alumnado o a los participantes.') : E('warn', 'No se menciona al alumnado: explica qué hará o utilizará.'));
+    const ac = hallar(t, RX.actividades);
+    out.push(ac ? E('ok', 'Aparecen actividades («' + ac + '»).') : E('warn', 'No identificamos actividades concretas (¿qué hará el alumnado?).'));
+    const te = hallar(t, RX.tech);
+    out.push(te ? E('ok', 'Recurso o tecnología: «' + te + '».') : E('warn', 'No identificamos qué recurso o tecnología utilizará el alumnado.'));
+    if (!detectaEtapa(t)) out.push(E('info', 'Puedes recordar a quién va dirigida (etapa y curso).'));
+    if (ctx && ctx.modo === 'proyectum' && ctx.briefing && BRIEFINGS[ctx.briefing]) {
+      BRIEFINGS[ctx.briefing].claves.forEach(c => { if (!kw(c.kw).test(nx(t))) out.push(E('info', 'El briefing pide ' + c.t + '. Si te caben las palabras, puedes mencionarlo.')); });
+    }
+    return out;
+  },
+  justificacion: function (t, ctx) {
+    const out = [itemLongitud('justificacion', t)];
+    const ne = hallar(t, RX.necesidad);
+    out.push(ne ? E('ok', 'Aparece una necesidad o situación de partida («' + ne + '»).') : E('warn', 'No identificamos la necesidad, problema o situación educativa que has detectado.'));
+    const re = hallar(t, RX.respuesta);
+    out.push(re ? E('ok', 'Explica por qué la propuesta puede responder («' + re + '»).') : E('warn', 'Falta explicar por qué tu propuesta puede dar una respuesta adecuada.'));
+    const s = hallar(t, RX.primeraSing), p = hallar(t, RX.primeraPlur);
+    if (s || p) out.push(E('ok', 'Incluye una motivación personal.'));
+    else out.push(E('warn', 'No detectamos tu motivación personal: ¿por qué has elegido este tema y trabajo?'));
+    if (ctx && ctx.persona === 'plur' && s && !p) out.push(E('info', 'Es un trabajo grupal: resulta más coherente escribir en plural («hemos observado», «hemos elegido»).'));
+    const ab = norm(t).match(RX.absolutos);
+    if (ab && !(norm(t).match(RX.compRes))) out.push(E('warn', 'Afirmación absoluta («' + ab[0] + '»). Usa expresiones prudentes.'));
+    return out;
+  }
+};
+
+function detectaEtapa(t) {
+  const n = nx(t);
+  const m = n.match(RX.etapa);
+  if (m) return hallar(t, RX.etapa);
+  const m2 = n.match(/\b\d{1,2}\s*\.?\s*o\s+(de|curso)\b|\b\d{1,2} anos\b|\b(primer|segundo|tercer|cuarto|quinto|sexto) (curso|ciclo)\b/);
+  return m2 ? String(t).substr(m2.index, m2[0].length) : null;
+}
+
+function revisar(sec, t, ctx) {
+  const txt = String(t || '');
+  if (!txt.trim()) return [E('err', 'Todavía no hay texto en este apartado.')];
+  return REV[sec](txt, ctx).concat(chequeosComunes(txt, ctx, sec));
+}
+
+function veredicto(items) {
+  if (items.length === 1 && items[0].s === 'err' && /Todavía no hay texto/.test(items[0].t)) return { s: 'err', t: 'Falta información para completar el apartado.' };
+  if (items.some(i => i.s === 'err')) return { s: 'err', t: 'Revisa los puntos marcados con ✗ antes de copiarlo.' };
+  if (items.some(i => i.s === 'warn')) return { s: 'warn', t: 'Puedes copiarlo, pero revisa los puntos señalados con ⚠.' };
+  return { s: 'ok', t: 'Has completado los elementos que podemos comprobar.' };
+}
+
+/* ---------------------------------------------------------------------
+   PLANTILLAS
+   --------------------------------------------------------------------- */
+function limpiarValor(v) { return String(v || '').replace(/\s+/g, ' ').trim().replace(/[.\s]+$/, ''); }
+function partesPlantilla(tpl, r, persona) {
+  const out = []; const re = /\{([A-Za-z0-9ñÑ_]+)\}/g; let last = 0, m;
+  const P = PERS[persona] || PERS.sing;
+  while ((m = re.exec(tpl))) {
+    if (m.index > last) out.push({ tipo: 'fijo', txt: tpl.slice(last, m.index) });
+    const k = m[1];
+    if (k === 'PREFIJO') out.push({ tipo: 'prefijo', txt: inicioFicha(limpiarValor((r || {}).verbo)) });
+    else if (k === 'INI1') out.push({ tipo: 'prefijo', txt: INI1 });
+    else if (k === 'INI2') out.push({ tipo: 'prefijo', txt: INI2 });
+    else if (P[k] !== undefined) out.push({ tipo: 'fijo', txt: P[k] });
+    else if (SLOTS[k]) { const v = limpiarValor((r || {})[k]) || SLOTS[k].def || ''; out.push({ tipo: 'slot', slot: k, lleno: !!v, txt: v || '[' + SLOTS[k].etq + ']' }); }
+    else out.push({ tipo: 'fijo', txt: m[0] });
+    last = re.lastIndex;
+  }
+  if (last < tpl.length) out.push({ tipo: 'fijo', txt: tpl.slice(last) });
+  return out;
+}
+function textoPlantilla(tpl, r, persona) {
+  let s = partesPlantilla(tpl, r, persona).map(p => p.txt).join('');
+  s = s.replace(/\s+/g, ' ').replace(/\s+([,.])/g, '$1').replace(/\.\./g, '.').trim();
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+function textoPersona(tpl, persona) { return textoPlantilla(tpl, {}, persona); }
+
+/* ---------------------------------------------------------------------
+   «YA TENGO UN TEXTO»: versión revisable (nunca sustituye sin permiso)
+   --------------------------------------------------------------------- */
+function proponerVersion(sec, t, ctx) {
+  let v = String(t || '');
+  v = (sec === 'titulo' || sec === 'objetivo') ? v.replace(/\s+/g, ' ').trim() : v.replace(/[ \t]+/g, ' ').replace(/ *\n */g, '\n').trim();
+  const cambios = [];
+  if (!v) return { texto: '', cambios: [] };
+  if (sec === 'titulo') {
+    const v0 = v; v = v.replace(/^[«"“']+|[»"”']+$/g, '').trim();
+    if (v !== v0) cambios.push('Hemos quitado las comillas: en la plataforma se escribe solo el título.');
+    if (/\.$/.test(v)) { v = v.replace(/\.+$/, ''); cambios.push('Hemos quitado el punto final: los títulos no lo llevan.'); }
+    const w1 = v.split(' ')[0]; const p = norm(w1).replace(/[^a-z]/g, '');
+    if (NOMINAL[p]) { v = NOMINAL[p] + ' ' + v.slice(w1.length).trim(); cambios.push('Hemos cambiado el verbo inicial «' + w1 + '» por un sustantivo («' + NOMINAL[p] + '»). Comprueba que la frase sigue teniendo sentido.'); }
+    v = v.charAt(0).toUpperCase() + v.slice(1);
+  }
+  if (sec === 'objetivo') {
+    const w0 = v.split(' ')[0];
+    if (VERBOS_APLIC.indexOf(primeraPalabraNorm(v)) >= 0) {
+      v = 'Diseñar' + v.slice(w0.length);
+      cambios.push('Hemos sustituido «' + w0 + '» por «Diseñar»: el TFM diseña la propuesta, no la implementa ni la evalúa.');
+    }
+    const nv = norm(v);
+    const RX_FORM = /^el objetivo( general)?( de (la|esta|mi|nuestra) propuesta| de (este|mi|nuestro) (trabajo|tfm|proyecto))? (es|sera|consiste en) ([a-z]+)\b/;
+    const mF = nv.match(RX_FORM);
+    const okFormula = !!(mF && VERBOS_DISENO.indexOf(mF[7]) >= 0);
+    const okInf = VERBOS_DISENO.indexOf(primeraPalabraNorm(v)) >= 0;
+    if (!okFormula && !okInf) {
+      let r = v;
+      r = r.replace(/^el objetivo( general)?( de (la|esta|mi|nuestra) propuesta| de (este|mi|nuestro) (trabajo|tfm|proyecto))?\s+(es|ser[aá]|consiste en)\s+/i, '');
+      r = r.replace(/^(dise[ñn]ar|crear|desarrollar|elaborar)\s+(un|una)\s+(proyecto|propuesta)(\s+de\s+innovaci[oó]n)?(\s+(tecnol[oó]gica|tecnoeducativa|educativa|docente))?\s*,?\s*/i, '');
+      r = r.replace(/^(para|con el fin de|con el objetivo de|que permita|a fin de)\s+/i, '');
+      r = r.replace(/^mejorar\s+/i, '');
+      const sp = r.match(/^(.*?)\s*,?\s+(?:para|con el fin de|con el objetivo de)\s+(?:mejorar\s+)?(.+)$/i);
+      if (sp && sp[1] && contarPalabras(sp[2]) >= 2) {
+        const metodo = sp[1].replace(/^basad[ao]/i, 'basado').replace(/^dirigid[ao]/i, 'dirigido');
+        r = sp[2].replace(/[.\s]+$/, '') + ', ' + metodo;
+        cambios.push('Hemos colocado lo que quieres mejorar justo después de «para mejorar» y hemos movido el resto al final.');
+      }
+      if (/^[A-ZÁÉÍÓÚÑ][a-záéíóúñü]/.test(r)) r = r.charAt(0).toLowerCase() + r.slice(1);
+      v = PREFIJO + ' ' + r;
+      cambios.push('Hemos añadido la fórmula de la ficha y conservado el resto de tu texto. Si prefieres empezar por el infinitivo («Diseñar…»), puedes editarlo en el resultado.');
+      const pr = primeraPalabraNorm(r);
+      if (VERBOS_INF.indexOf(pr) >= 0) cambios.push('Tras «para mejorar» aparece otro verbo («' + r.split(' ')[0] + '»). Sustitúyelo por lo que quieres mejorar (por ejemplo, «la comprensión lectora…»).');
+    } else if (okFormula && v.indexOf(INI1) !== 0) {
+      v = INI1 + v.slice(INI1.length);
+      cambios.push('Hemos corregido mayúsculas o tildes del comienzo.');
+    }
+    if (/^[a-záéíóúñ]/.test(v)) { v = v.charAt(0).toUpperCase() + v.slice(1); cambios.push('Hemos puesto mayúscula inicial.'); }
+    if (!/[.]$/.test(v)) { v += '.'; cambios.push('Hemos añadido el punto final.'); }
+  }
+  if (sec === 'descripcion' || sec === 'justificacion') {
+    if (!/[.!?…]$/.test(v)) { v += '.'; cambios.push('Hemos añadido el punto final.'); }
+    if (/^[a-záéíóúñ]/.test(v)) { v = v.charAt(0).toUpperCase() + v.slice(1); cambios.push('Hemos puesto mayúscula inicial.'); }
+  }
+  const L = SEC[sec].limite, w = contarPalabras(v);
+  if (w > L.max) cambios.push('Tiene ' + w + ' palabras (te sobran ' + (w - L.max) + '). No recortamos tu texto: hazlo tú en el resultado.');
+  return { texto: v, cambios: cambios };
+}
+
+function diffPalabras(a, b) {
+  const A = String(a).split(/\s+/).filter(Boolean), B = String(b).split(/\s+/).filter(Boolean);
+  const n = A.length, m = B.length;
+  if (n * m > 250000) return [{ t: 'del', w: a }, { t: 'ins', w: b }];
+  const dp = []; for (let i = 0; i <= n; i++) dp.push(new Uint16Array(m + 1));
+  for (let i = n - 1; i >= 0; i--) for (let j = m - 1; j >= 0; j--) dp[i][j] = A[i] === B[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+  const out = []; let i = 0, j = 0;
+  while (i < n && j < m) {
+    if (A[i] === B[j]) { out.push({ t: 'eq', w: A[i] }); i++; j++; }
+    else if (dp[i + 1][j] >= dp[i][j + 1]) { out.push({ t: 'del', w: A[i] }); i++; }
+    else { out.push({ t: 'ins', w: B[j] }); j++; }
+  }
+  while (i < n) out.push({ t: 'del', w: A[i++] });
+  while (j < m) out.push({ t: 'ins', w: B[j++] });
+  return out;
+}
+
+if (typeof module !== 'undefined') module.exports = { SEC, SLOTS, MODOS, BRIEFINGS, FAQ, PASOS, LINEAS, PREFIJO, VERBOS_OBJ, VERBO_DEF, INI1, INI2, EJ_LINEA, ejemplosSlot, inicioFicha, revisar, veredicto, textoPlantilla, partesPlantilla, proponerVersion, diffPalabras, contarPalabras, textoPersona };
+
+</script>
+<script>
+'use strict';
+(function () {
+  const KEY = 'ficha-tfm-mutecd-v1';
+  let S = null;
+  try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { S = null; }
+  if (!S || typeof S !== 'object' || !S.datos) S = { vista: 'inicio', modo: null, paso: {}, datos: {} };
+  const TMP = { prop: {}, faqCat: 'todas', faqQ: '' };
+  let tG = null;
+  function guardar() { clearTimeout(tG); tG = setTimeout(function () { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { } }, 250); }
+  function D(m) {
+    m = m || S.modo;
+    if (!S.datos[m]) S.datos[m] = { r: {}, txt: {}, pl: {}, chk: {}, linea: null, briefing: null, listo: {}, entrada: {}, pegado: {}, prev: {} };
+    if (!S.datos[m].r.verbo) S.datos[m].r.verbo = VERBO_DEF;
+    return S.datos[m];
+  }
+  function ctx() { const d = D(); return { modo: S.modo, persona: MODOS[S.modo].persona, briefing: d.briefing, linea: d.linea }; }
+  const $ = function (s) { return document.querySelector(s); };
+  function h(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function pasoActual() { return PASOS[S.paso[S.modo] || 0].id; }
+
+  /* ------------------------------ Estados ------------------------------ */
+  function chkOK(list) { const d = D(); return list.filter(function (i) { return i.crit; }).every(function (i) { return d.chk[i.id]; }); }
+  function chkAlguno(list) { const d = D(); return list.some(function (i) { return d.chk[i.id]; }); }
+  function estadoTexto(sec) {
+    const d = D(), t = d.txt[sec] || '';
+    if (!t.trim()) return 'vacio';
+    const v = veredicto(revisar(sec, t, ctx()));
+    if (d.listo[sec]) return v.s === 'err' ? 'aviso' : 'ok';
+    return 'curso';
+  }
+  function estadoPaso(id) {
+    const d = D(), M = MODOS[S.modo];
+    if (id === 'antes') { const ok = chkOK(M.antes) && (S.modo !== 'proyectum' || d.briefing); return ok ? 'ok' : (chkAlguno(M.antes) || d.briefing ? 'curso' : 'vacio'); }
+    if (id === 'datos') return d.chk.d1 ? 'ok' : 'vacio';
+    if (id === 'modalidad') return chkOK(M.modalidad) ? 'ok' : (chkAlguno(M.modalidad) ? 'curso' : 'vacio');
+    if (id === 'area') return d.linea != null ? 'ok' : 'vacio';
+    if (SEC[id]) return estadoTexto(id);
+    return 'nada';
+  }
+  const ICO = { ok: '✓', curso: '•', aviso: '!', vacio: '', nada: '' };
+
+  /* ------------------------------ Render general ------------------------------ */
+  function render(arriba) {
+    $('#plazo').innerHTML = '📅 Plazo: <strong>' + h(CONV.corto) + '</strong> · improrrogable';
+    $('#tabs').innerHTML = renderTabs();
+    const main = $('#main');
+    if (S.vista === 'faq') main.innerHTML = renderFaq();
+    else if (S.vista === 'modo' && S.modo && MODOS[S.modo]) main.innerHTML = renderModo();
+    else main.innerHTML = renderInicio();
+    if (arriba) window.scrollTo(0, 0);
+    guardar();
+  }
+  function renderTabs() {
+    const t = [['inicio', 'Inicio'], ['individual', '👤 Individual'], ['grupal', '👥 Grupal'], ['proyectum', '🏫 Red Proyectum'], ['faq', '❓ Preguntas frecuentes']];
+    return t.map(function (x) {
+      const act = (x[0] === 'inicio' && S.vista === 'inicio') || (x[0] === 'faq' && S.vista === 'faq') || (S.vista === 'modo' && S.modo === x[0]);
+      return '<button class="tab' + (act ? ' act' : '') + '" data-action="ir" data-v="' + x[0] + '"' + (act ? ' aria-current="page"' : '') + '>' + x[1] + '</button>';
+    }).join('');
+  }
+
+  /* ------------------------------ Inicio ------------------------------ */
+  function renderInicio() {
+    const cards = ['individual', 'grupal', 'proyectum'].map(function (k) {
+      const M = MODOS[k];
+      const extra = k === 'grupal' ? '<li>Compromiso firmado por todos los miembros</li>' : (k === 'proyectum' ? '<li>Propuesta de un centro (briefing)</li><li>Compromiso firmado por todos</li>' : '<li>Una de las 12 líneas de trabajo</li>');
+      return '<button class="modo-card" data-action="ir" data-v="' + k + '"><span class="ico" aria-hidden="true">' + M.icono + '</span><h3>' + M.nombre + '</h3><ul><li>' + h(M.quien) + '</li>' + extra + '</ul><span class="ir">Empezar con ' + M.nombre + '</span></button>';
+    }).join('');
+    return '<section class="hero"><h2>¿Qué modalidad de TFM vas a presentar?</h2>' +
+      '<p class="lead">Esta herramienta te guía apartado por apartado para que rellenes bien la ficha de solicitud: te explica qué pide cada campo, te hace preguntas sencillas, te da una plantilla, revisa tu texto y te lo deja listo para copiar y pegar en la plataforma.</p></section>' +
+      '<div class="modos">' + cards + '</div>' +
+      '<div class="bloque"><h3>Cómo funciona</h3><ol class="como"><li>Elige tu modalidad y revisa sus requisitos.</li><li>Responde a preguntas sencillas sobre tu propuesta.</li><li>Elige una plantilla: se completa con tus respuestas y puedes editarla.</li><li>Revisa los avisos, copia el texto y pégalo en la plataforma.</li></ol>' +
+      '<div class="leyenda"><span><i class="sw" style="background:var(--rojo-bg);border:1.5px dashed var(--rojo)"></i>Rojo: lo que completas tú</span><span><i class="sw" style="background:#e8ebf3"></i>Gris: texto fijo de la ficha</span><span><i class="sw" style="background:var(--verde-bg);border:1.5px solid var(--verde)"></i>Verde: ejemplo ficticio, no lo copies</span><span><i class="sw" style="background:var(--azul-bg);border:1.5px solid var(--azul)"></i>Azul: tu resultado para copiar</span></div></div>' +
+      '<div class="alerta azul"><strong>Plazo de solicitud (' + h(CONV.etiqueta) + ')</strong>Del ' + h(CONV.apertura) + ' al ' + h(CONV.cierre) + '. Es improrrogable: las solicitudes fuera de plazo no se considerarán. Recuerda que solo puedes enviar el formulario una vez.</div>' +
+      '<div class="alerta ambar"><strong>Esta herramienta no aprueba propuestas</strong>Comprueba algunos elementos de forma automática. La coordinación da una aceptación provisional y es tu director o directora quien acepta definitivamente la propuesta.</div>';
+  }
+
+  /* ------------------------------ Modalidad ------------------------------ */
+  function renderModo() {
+    const i = S.paso[S.modo] || 0, M = MODOS[S.modo];
+    return '<div class="modo-head"><span style="font-size:1.6rem" aria-hidden="true">' + M.icono + '</span><h2>TFM ' + M.nombre + '</h2><span class="chip">' + h(M.quien.split(',')[0].split('(')[0].trim()) + '</span><button class="btn fant" data-action="ir" data-v="inicio">Cambiar de modalidad</button></div>' + barraProgreso() +
+      '<div class="layout"><nav class="pasos" aria-label="Pasos de la ficha">' + renderPasos() + '</nav><div class="contenido" id="contenido">' + renderPaso(PASOS[i].id) + renderNav(i) + '</div></div>';
+  }
+  function barraProgreso() {
+    const hechos = PASOS.filter(function (p) { return p.id !== 'final' && estadoPaso(p.id) === 'ok'; }).length;
+    const total = PASOS.length - 1;
+    const pct = Math.round(hechos / total * 100);
+    return '<div class="prog"><div class="bar"><span style="width:' + pct + '%"></span></div><strong>' + hechos + ' de ' + total + '</strong><span>pasos completados</span></div>';
+  }
+  function renderPasos() {
+    const cur = S.paso[S.modo] || 0;
+    return PASOS.map(function (p, i) {
+      const e = estadoPaso(p.id);
+      return '<button class="paso' + (i === cur ? ' act' : '') + '" data-action="paso" data-i="' + i + '"' + (i === cur ? ' aria-current="step"' : '') + '><span class="ic ' + e + '" aria-hidden="true">' + (p.id === 'final' ? '★' : ICO[e]) + '</span><span>' + h(p.et) + '</span></button>';
+    }).join('');
+  }
+  function refrescarPasos() { const n = $('.pasos'); if (n) n.innerHTML = renderPasos(); }
+  function renderNav(i) {
+    const a = i > 0 ? '<button class="btn sec" data-action="mover" data-d="-1">← ' + h(PASOS[i - 1].et) + '</button>' : '<span></span>';
+    const s = i < PASOS.length - 1 ? '<button class="btn" data-action="mover" data-d="1">Siguiente: ' + h(PASOS[i + 1].et) + '</button>' : '';
+    return '<div class="nav">' + a + s + '</div>';
+  }
+  function renderPaso(id) {
+    if (id === 'antes') return pasoAntes();
+    if (id === 'datos') return pasoDatos();
+    if (id === 'modalidad') return pasoModalidad();
+    if (id === 'area') return pasoArea();
+    if (id === 'final') return pasoFinal();
+    return pasoTexto(id);
+  }
+  function checklist(list) {
+    const d = D();
+    return list.map(function (it) {
+      const on = !!d.chk[it.id];
+      return '<label class="check' + (it.crit ? ' crit' : '') + (it.crit && !on ? ' falta' : '') + '"><input type="checkbox" data-chk="' + it.id + '"' + (on ? ' checked' : '') + '><span>' + h(it.t) + '</span></label>';
+    }).join('');
+  }
+  function faltan(list) { const d = D(); return list.filter(function (i) { return i.crit && !d.chk[i.id]; }); }
+
+  function pasoAntes() {
+    const M = MODOS[S.modo], d = D();
+    let html = '<div class="bloque"><h3>TFM ' + M.nombre + ': lo que debes saber</h3><div class="info-modo"><div><b>Quién lo elabora</b>' + h(M.quien) + '</div><div><b>Extensión</b>' + h(M.extension) + '</div><div><b>Defensa</b>' + h(M.defensa) + '</div></div></div>';
+    if (M.aviso) html += '<div class="alerta roja"><strong>⚠ Importante</strong>' + h(M.aviso) + '</div>';
+    const tit = S.modo === 'individual' ? 'Antes de empezar' : 'Antes de continuar';
+    html += '<div class="bloque"><h3>' + tit + '</h3>' + checklist(M.antes);
+    const f = faltan(M.antes);
+    html += f.length ? '<div class="alerta roja"><strong>Revisa este requisito antes de enviar la solicitud.</strong>Te falta confirmar: ' + f.map(function (x) { return '«' + h(x.t.replace(/\.$/, '')) + '»'; }).join('; ') + '.</div>' : '<div class="alerta verde"><strong>✓ Requisitos de modalidad confirmados</strong>Puedes continuar con la ficha.</div>';
+    html += '</div>';
+    if (S.modo === 'proyectum') html += bloqueBriefing();
+    html += '<div class="bloque"><h3>Las tres condiciones de toda propuesta</h3><div class="tres"><div><b>Tecnológica</b>Hay tecnología educativa con una función didáctica real.</div><div><b>Innovadora</b>Aporta algo que no está resuelto en ese contexto.</div><div class="crit"><b>Pedagógica</b>Alguien aprende algo. Es la condición crítica.</div></div>' +
+      '<div class="alerta roja" style="margin-top:12px"><strong>El motivo de rechazo más frecuente: propuestas no pedagógicas</strong>Apps para organizar guardias, paneles para controlar ausencias del profesorado o sistemas para gestionar matrículas pueden ser útiles, pero en ellos nadie aprende nada.</div>' +
+      '<p><b>Otros motivos de rechazo:</b> objetivo mal formulado o sin la estructura requerida; tema demasiado general o ambicioso; planteamiento como investigación y no como diseño; afirmar que se implementará en un aula real.</p></div>';
+    return html;
+  }
+  function bloqueBriefing() {
+    const d = D();
+    let html = '<div class="bloque" id="briefing"><h3>Elige vuestra propuesta de Red Proyectum</h3><p>Los briefings están en el aula de TFM. Cada propuesta tiene su tema, sus destinatarios y sus requisitos: la ficha debe responder a ellos.</p><div class="briefs">';
+    Object.keys(BRIEFINGS).forEach(function (k) {
+      const b = BRIEFINGS[k];
+      html += '<button class="brief' + (d.briefing === k ? ' sel' : '') + '" data-action="briefing" data-b="' + k + '" aria-pressed="' + (d.briefing === k) + '"><span class="b-ico" aria-hidden="true">' + b.icono + '</span><strong>' + h(b.nombre) + '</strong><span>' + h(b.asignatura) + ' · ' + h(b.etapa) + '</span></button>';
+    });
+    html += '</div>';
+    if (d.briefing) {
+      const b = BRIEFINGS[d.briefing];
+      html += '<div class="brief-det"><dl><dt>Centro</dt><dd>Colegio Base International School</dd><dt>Asignatura</dt><dd>' + h(b.asignatura) + '</dd><dt>Destinatarios</dt><dd>' + h(b.etapa) + '</dd><dt>Qué pide</dt><dd>' + h(b.objetivo) + '</dd><dt>Enfoque</dt><dd>' + h(b.enfoque) + '</dd></dl>' +
+        '<b>Requisitos principales del briefing</b><ul>' + b.requisitos.map(function (r) { return '<li>' + h(r) + '</li>'; }).join('') + '</ul>' +
+        '<div class="alerta ambar"><strong>Consejo</strong>' + h(b.consejo) + '</div>' +
+        '<div class="alerta azul"><strong>Hemos rellenado algunas respuestas a partir del briefing</strong>Destinatarios, área y finalidad aparecerán ya escritos en las preguntas de los apartados 3 y 4. Puedes cambiarlos.</div></div>';
+    }
+    return html + '</div>';
+  }
+  function pasoDatos() {
+    return '<div class="bloque"><h3>Instrucciones de la ficha</h3><ol><li>Debes rellenar todos los datos solicitados.</li><li>El envío del formulario <b>no</b> implica su aprobación: tu director o directora aceptará definitivamente la propuesta.</li><li>A cada estudiante se le asignará un aula virtual y un director o directora según la línea de trabajo elegida.</li><li>Una vez enviado, podrás hacer el seguimiento desde «Resultado de actividades».</li></ol></div>' +
+      '<div class="bloque"><h3>Datos personales</h3><p>La ficha pide estos datos. <b>Rellénalos directamente en la plataforma:</b> esta herramienta no los pide ni los guarda.</p><ul><li>Dirección de email</li><li>Teléfono (fijo o móvil)</li><li>Número de documento de identidad</li><li>País / Provincia</li></ul>' + checklist([{ id: 'd1', t: 'Entendido: rellenaré mis datos personales directamente en la plataforma.', crit: false }]) + '</div>';
+  }
+  function pasoModalidad() {
+    const M = MODOS[S.modo];
+    let html = '<div class="ap-head"><span class="ap-num">1</span><div><h2>Modalidad</h2><span class="limite ori">Se marca en la plataforma</span></div></div>' +
+      '<p class="ficha"><b>En la ficha:</b> 1. Modalidad (Individual / Grupal / Red Proyectum). En caso de modalidad GRUPAL, indica el nombre de tus compañeros. En caso de modalidad grupal, adjuntar el compromiso grupal cumplimentado (PDF, DOC, DOCX, ZIP, máximo 50 MB).</p>' +
+      '<div class="bloque"><h3>Qué tienes que hacer en la plataforma</h3>' + checklist(M.modalidad) + '<div class="alerta azul">' + h(M.modalidadNota) + '</div>';
+    const f = faltan(M.modalidad);
+    if (f.length && S.modo !== 'individual') html += '<div class="alerta roja"><strong>Revisa este requisito antes de enviar la solicitud.</strong>Si falta el compromiso firmado por todos los miembros, la solicitud se rechazará.</div>';
+    html += '</div>';
+    if (S.modo !== 'individual') html += '<div class="bloque"><h3>Dónde está el compromiso</h3><p>Al principio del formulario, en <b>«Ficheros descargables del formulario»</b>: «Compromiso grupal / Red Proyectum. Cumplimentar en caso grupal / Red Proyectum».</p><p>Formatos admitidos al adjuntarlo: PDF, DOC, DOCX o ZIP, hasta 50 MB.</p></div>';
+    return html;
+  }
+  function pasoArea() {
+    const d = D();
+    let sug = null;
+    if (S.modo === 'proyectum' && d.briefing) sug = BRIEFINGS[d.briefing].lineaSugerida;
+    let html = '<div class="ap-head"><span class="ap-num">2</span><div><h2>Área específica de trabajo</h2><span class="limite ori">Se marca en la plataforma</span></div></div>' +
+      '<p class="ficha"><b>En la ficha:</b> 2. Área específica de trabajo (selecciona el área en el que te gustaría desarrollar tu TFM).</p>';
+    if (S.modo === 'proyectum') html += '<div class="alerta ambar"><strong>Red Proyectum</strong>Los briefings no indican qué línea marcar. Elegid la que mejor describa la propuesta y, si tenéis dudas, consultadlo en el foro.' + (sug != null ? ' Por su nombre, esta propuesta parece cercana a la línea ' + (sug + 1) + ' (orientativo, no es una indicación oficial).' : '') + '</div>';
+    html += '<div class="bloque"><h3>¿En qué línea encaja tu propuesta?</h3><p>La línea elegida influye en la asignación de director o directora. Tu título y tu objetivo deberían reflejarla.</p><div class="lineas">';
+    LINEAS.forEach(function (l, i) {
+      html += '<label class="linea' + (d.linea === i ? ' sel' : '') + '"><input type="radio" name="linea" data-linea="' + i + '"' + (d.linea === i ? ' checked' : '') + '><small>Línea ' + (i + 1) + '</small><span>' + h(l) + '</span>' + (sug === i ? '<em>orientativa</em>' : '') + '</label>';
+    });
+    html += '</div>';
+    if (d.linea != null) html += '<div class="alerta verde"><strong>En el formulario, marca:</strong>«' + h(LINEAS[d.linea]) + '»</div>';
+    return html + '</div>';
+  }
+
+  /* ------------------------------ Apartados de texto ------------------------------ */
+  function previewHTML(tpl, r, persona) {
+    return partesPlantilla(tpl, r, persona).map(function (p) {
+      if (p.tipo === 'prefijo') return '<span class="pref" title="Inicio obligatorio de la ficha">' + h(p.txt) + '</span>';
+      if (p.tipo === 'slot') return '<mark class="slot ' + (p.lleno ? 'lleno' : 'vacio') + '">' + h(p.txt) + '</mark>';
+      return h(p.txt);
+    }).join('');
+  }
+  function contadorHTML(sec, t) {
+    const L = SEC[sec].limite, w = contarPalabras(t);
+    const pct = Math.min(100, Math.round(w / L.max * 100));
+    let cls = 'ok', msg = '';
+    if (L.tipo === 'obligatorio') {
+      if (w > L.max) { cls = 'err'; msg = 'Has superado el número máximo de palabras.'; }
+      else if (w >= Math.ceil(L.max * 0.9)) { cls = 'warn'; msg = 'Estás cerca del máximo.'; }
+    } else {
+      if (w > L.max) { cls = 'warn'; msg = 'Has superado la extensión recomendada.'; }
+      else if (w > 0 && w < L.min) { cls = 'warn'; msg = 'Puede quedarse corto.'; }
+    }
+    return '<div class="cnt ' + cls + '"><div class="bar" aria-hidden="true"><span style="width:' + pct + '%"></span></div><strong>' + w + ' / ' + L.max + ' palabras</strong><span class="tipo">' + (L.tipo === 'obligatorio' ? 'máximo obligatorio' : 'extensión orientativa') + '</span>' + (msg ? '<span class="msg">' + msg + '</span>' : '') + '</div>';
+  }
+  function revisionHTML(sec) {
+    const items = revisar(sec, D().txt[sec] || '', ctx()), v = veredicto(items);
+    const M = { ok: '✓', warn: '!', err: '✗', info: 'i' };
+    return '<ul>' + items.map(function (i) { return '<li><span class="m ' + i.s + '" aria-label="' + i.s + '">' + M[i.s] + '</span><span>' + h(i.t) + '</span></li>'; }).join('') + '</ul><div class="ver ' + v.s + '">' + h(v.t) + '</div>';
+  }
+  function pasoTexto(sec) {
+    const c = SEC[sec], d = D(), cx = ctx();
+    const modoE = d.entrada[sec] || 'guiado';
+    const txt = d.txt[sec] || '';
+    let aviso = '';
+    if (S.modo === 'proyectum' && !d.briefing) aviso = '<div class="alerta ambar"><strong>Primero elegid vuestra propuesta</strong>Así la herramienta podrá ajustar las preguntas y las revisiones al briefing. <button class="btn peq" data-action="irBriefing">Elegir propuesta</button></div>';
+    let html = '<div class="ap-head"><span class="ap-num">' + c.num + '</span><div><h2>' + h(c.nombre) + '</h2><span class="limite ' + (c.limite.tipo === 'obligatorio' ? 'obl' : 'ori') + '">' + (c.limite.tipo === 'obligatorio' ? 'Máximo ' + c.limite.max + ' palabras · obligatorio' : 'Unas ' + c.limite.max + ' palabras · orientativo') + '</span></div></div>' +
+      '<p class="ficha"><b>Lo que dice la ficha:</b> ' + h(c.ficha) + '</p>' + (c.nota ? '<div class="alerta azul"><strong>Dos formas válidas de empezar</strong>' + h(c.nota) + '</div>' : '') + aviso +
+      '<div class="entrada" role="group" aria-label="Cómo quieres empezar"><button class="' + (modoE === 'guiado' ? 'act' : '') + '" data-action="entrada" data-sec="' + sec + '" data-m="guiado"><strong>🧭 No sé qué poner</strong><span>Te guiamos con preguntas y plantillas</span></button><button class="' + (modoE === 'pegar' ? 'act' : '') + '" data-action="entrada" data-sec="' + sec + '" data-m="pegar"><strong>📝 Ya tengo un texto</strong><span>Pégalo y lo revisamos</span></button></div>';
+    let main = '';
+    main += '<div class="bloque"><h3><span class="n">1</span>Qué te pide este apartado</h3><p>' + h(c.guia) + '</p><div class="dos"><div class="si"><b>Debe contener</b><ul>' + c.contiene.map(function (x) { return '<li>' + h(x) + '</li>'; }).join('') + '</ul></div><div class="no"><b>Evita</b><ul>' + c.evita.map(function (x) { return '<li>' + h(x) + '</li>'; }).join('') + '</ul></div></div></div>';
+    main += bloqueAnatomia(sec);
+    if (modoE === 'guiado') main += bloqueGuiado(sec); else main += bloquePegar(sec);
+    main += bloqueEjemplo(sec);
+    main += '<div class="bloque resultado" id="res-' + sec + '"><h3><span class="n" style="background:var(--azul)">4</span>Resultado para copiar</h3><p class="nota" style="margin-top:0">Este es el texto que pegarás en la plataforma. Puedes cambiar cualquier palabra.</p>' +
+      '<label class="sr" for="txt-' + sec + '">Resultado de ' + h(c.corto) + '</label><textarea id="txt-' + sec + '" data-txt="' + sec + '" class="' + (sec === 'titulo' ? 'corto' : '') + '" placeholder="Aquí aparecerá tu texto cuando pases la plantilla o cuando lo escribas tú.">' + h(txt) + '</textarea>' +
+      '<div id="cnt-' + sec + '">' + contadorHTML(sec, txt) + '</div>' +
+      '<div class="acciones"><button class="btn copiar" data-action="copiar" data-sec="' + sec + '">📋 Copiar</button>' + (d.prev[sec] != null ? '<button class="btn sec peq" data-action="deshacer" data-sec="' + sec + '">↶ Recuperar mi texto anterior</button>' : '') + '<button class="btn fant" data-action="limpiar" data-sec="' + sec + '">Empezar de nuevo</button></div></div>';
+    main += '<div class="bloque rev"><h3><span class="n">5</span>Revisión antes de copiar</h3><div id="rev-' + sec + '" aria-live="polite">' + revisionHTML(sec) + '</div>' +
+      '<div class="acciones"><button class="btn sec" data-action="listo" data-sec="' + sec + '">' + (d.listo[sec] ? '✓ Apartado marcado como terminado' : 'Marcar apartado como terminado') + '</button></div>' +
+      '<p class="nota">La revisión es automática y orientativa: busca palabras y estructuras. No aprueba tu propuesta.</p></div>';
+    const lat = bloqueLateral(sec);
+    return html + '<div class="cols"><div>' + main + '</div><aside class="lat">' + lat + '</aside></div>';
+  }
+  function usaSlots(sec) {
+    const c = SEC[sec], d = D(), j = d.pl[sec] || 0;
+    const t = c.plantillas[j] ? c.plantillas[j].t : '';
+    const out = []; const re = /\{([A-Za-z0-9ñÑ_]+)\}/g; let m;
+    while ((m = re.exec(t))) if (SLOTS[m[1]]) out.push(m[1]);
+    return out;
+  }
+  function bloqueAnatomia(sec) {
+    const c = SEC[sec], d = D();
+    if (!c.anatomia) return '';
+    const tit = sec === 'titulo' ? 'Las cuatro piezas de un buen título' : 'Las cuatro piezas de un buen objetivo';
+    return '<div class="bloque anat"><h3>' + tit + '</h3><div class="piezas">' + c.anatomia.map(function (a) {
+      const vals = a.slots.map(function (k) { return String(d.r[k] || SLOTS[k].def || '').trim(); }).filter(Boolean);
+      const est = vals.length === a.slots.length ? 'ok' : (vals.length ? 'medio' : '');
+      return '<div class="pieza ' + est + '"><span class="p-et">' + h(a.et) + '</span><span class="p-q">' + h(a.q) + '</span><span class="p-val">' + (vals.length ? h(vals.join(' · ')) : 'sin completar') + '</span></div>';
+    }).join('') + '</div><p class="nota" style="margin-bottom:0">Se rellenan con tus respuestas del paso 2. Si las cuatro están completas, tu ' + (sec === 'titulo' ? 'título' : 'objetivo') + ' tendrá todo lo que se pide.</p></div>';
+  }
+  function bloqueGuiado(sec) {
+    const c = SEC[sec], d = D(), cx = ctx();
+    const b = S.modo === 'proyectum' && d.briefing ? BRIEFINGS[d.briefing] : null;
+    let html = '<div class="bloque"><h3><span class="n">2</span>Antes de escribir, responde a estas preguntas</h3><p class="nota" style="margin-top:0">Respuestas cortas. Lo que escribas aparecerá en rojo dentro de la plantilla.' + (sec === 'titulo' || sec === 'objetivo' ? ' Las respuestas se comparten entre el título y el objetivo.' : '') + '</p><div class="preg">';
+    const usados = usaSlots(sec);
+    c.preguntas.forEach(function (k) {
+      const s = SLOTS[k], val = d.r[k] || '';
+      const pre = b && b.prefill[k] && val === b.prefill[k];
+      const ejs = ejemplosSlot(k, d.linea);
+      const off = usados && usados.indexOf(k) < 0;
+      let campo;
+      if (s.opciones) {
+        campo = '<span class="ops">' + s.opciones.map(function (o) {
+          return '<button type="button" class="op' + ((val || s.def) === o ? ' sel' : '') + '" data-action="ej" data-slot="' + k + '" data-v="' + h(o) + '">' + h(o) + '</button>';
+        }).join('') + '</span>';
+      } else {
+        campo = '<input type="text" data-slot="' + k + '" value="' + h(val) + '" placeholder="p. ej., ' + h(ejs[0] || '') + '" autocomplete="off">' +
+          '<span class="chips">' + ejs.map(function (x) { return '<button type="button" class="chip-ej" data-action="ej" data-slot="' + k + '" data-v="' + h(x) + '" title="Usar este ejemplo">' + h(x) + '</button>'; }).join('') + '</span>';
+      }
+      const pie = pre ? '<small class="prefill">Propuesto a partir del briefing. Puedes cambiarlo.</small>'
+        : (s.ayuda ? '<small>' + h(s.ayuda) + '</small>' : (s.opciones ? '' : '<small>Toca un ejemplo para usarlo' + (d.linea != null ? ' (adaptados a tu línea de trabajo)' : '') + '.</small>'));
+      html += '<label class="' + (off ? 'off' : '') + '"><span class="etq">[' + h(s.etq) + ']' + (off ? '<em>no se usa en la plantilla elegida</em>' : '') + '</span><span class="q">' + h(s.q) + '</span>' + campo + pie + '</label>';
+    });
+    html += '</div></div>';
+    const sel = d.pl[sec] || 0;
+    html += '<div class="bloque"><h3><span class="n">3</span>Elige una plantilla</h3><p class="nota" style="margin-top:0">Se completa sola con tus respuestas. Los huecos en rojo con corchetes son lo que te falta.</p><div class="plants">';
+    c.plantillas.forEach(function (p, j) {
+      html += '<label class="pl' + (sel === j ? ' sel' : '') + '"><input type="radio" name="pl-' + sec + '" data-plantilla="' + sec + '" value="' + j + '"' + (sel === j ? ' checked' : '') + '><div style="min-width:0;flex:1"><strong>' + h(p.nombre) + '</strong><p class="cuando">' + h(p.cuando) + '</p><div class="preview" id="pv-' + sec + '-' + j + '">' + previewHTML(p.t, d.r, cx.persona) + '</div><div class="pv-count" id="pc-' + sec + '-' + j + '">' + contarPalabras(textoPlantilla(p.t, d.r, cx.persona)) + ' palabras con tus respuestas</div></div></label>';
+    });
+    html += '</div>';
+    if (sec === 'objetivo') html += '<p class="nota">El texto gris es la fórmula de la ficha: ocupa 15 de tus 50 palabras. La plantilla C no la utiliza y empieza directamente por el verbo.</p>';
+    html += '<div class="acciones"><button class="btn" data-action="montar" data-sec="' + sec + '">Pasar la plantilla al resultado ↓</button></div></div>';
+    return html;
+  }
+  function bloquePegar(sec) {
+    const d = D(), p = TMP.prop[sec];
+    let html = '<div class="bloque pegar"><h3><span class="n">2</span>Pega aquí lo que ya tienes escrito</h3><label class="sr" for="peg-' + sec + '">Tu texto</label><textarea id="peg-' + sec + '" data-pegado="' + sec + '" placeholder="Pega tu texto…">' + h(d.pegado[sec] || '') + '</textarea><div class="acciones"><button class="btn" data-action="analizar" data-sec="' + sec + '">Revisar mi texto</button></div></div>';
+    if (p) {
+      const orig = String(d.pegado[sec] || '').trim();
+      const igual = p.texto === orig.replace(/[ \t]+/g, ' ').replace(/ *\n */g, '\n').trim() || p.cambios.length === 0;
+      html += '<div class="bloque"><h3><span class="n">3</span>Versión revisable</h3>';
+      if (igual) html += '<p>No proponemos cambios automáticos. Revisa los avisos del paso 5 y corrige lo necesario en el resultado.</p>';
+      else html += '<p>Tu texto no se ha sustituido. Esto es lo que proponemos cambiar (<ins style="background:#d8f0e1;text-decoration:none">verde</ins>: añadido; <del style="background:#fbdde2">rojo</del>: quitado):</p><div class="diff">' + diffPalabras(orig, p.texto).map(function (x) { return x.t === 'eq' ? h(x.w) : (x.t === 'ins' ? '<ins>' + h(x.w) + '</ins>' : '<del>' + h(x.w) + '</del>'); }).join(' ') + '</div>';
+      if (p.cambios.length) html += '<ul class="cambios">' + p.cambios.map(function (c) { return '<li>' + h(c) + '</li>'; }).join('') + '</ul>';
+      html += '<div class="acciones">' + (igual ? '' : '<button class="btn" data-action="usarProp" data-sec="' + sec + '">Usar la versión revisable</button>') + '<button class="btn sec" data-action="usarMio" data-sec="' + sec + '">Usar mi texto tal cual</button></div>';
+      html += '<p class="nota">Si tu texto no sigue la estructura, abre «No sé qué poner» para ver la plantilla recomendada.</p></div>';
+    }
+    return html;
+  }
+  function bloqueEjemplo(sec) {
+    const c = SEC[sec], cx = ctx();
+    const lista = c.ejemplos || [c.ejemplo];
+    const in_ = lista.map(function (e) {
+      return (e.titulo ? '<h4 class="ej-tit">' + h(e.titulo) + '</h4>' : '') +
+        '<div class="ej-txt">' + h(textoPersona(e.texto, cx.persona)) + '</div>' +
+        '<div class="ej-notas">' + e.notas.map(function (n) { return '<span>✓ ' + h(n) + '</span>'; }).join('') + '</div>';
+    }).join('');
+    return '<details class="ejemplo"><summary>Ver ' + (lista.length > 1 ? 'ejemplos completados (ficticios)' : 'un ejemplo completado (ficticio)') + '</summary><div class="in"><p style="margin-top:0">' + (lista.length > 1 ? 'Son ejemplos inventados para que veas cómo queda.' : 'Es un ejemplo inventado para que veas cómo queda.') + ' <b>No los copies:</b> adáptalos a tu propuesta.</p>' + in_ + '</div></details>';
+  }
+  function bloqueLateral(sec) {
+    const c = SEC[sec], d = D();
+    const cons = c.consejos.slice();
+    if (S.modo === 'proyectum' && d.briefing && (sec === 'descripcion' || sec === 'justificacion')) cons.push(BRIEFINGS[d.briefing].consejo);
+    if (S.modo !== 'individual' && sec === 'justificacion') cons[2] = 'Incluid vuestra motivación: la ficha pregunta por qué habéis elegido este tema y trabajo.';
+    let html = '<div class="consejo"><h4>💡 Consejo</h4><ul>' + cons.map(function (x) { return '<li>' + h(x) + '</li>'; }).join('') + '</ul></div>';
+    html += '<div class="errores"><h4>Errores frecuentes</h4>' + c.errores.map(function (e) { return '<div class="err-item"><div class="mal">❌ «' + h(e.mal) + '»</div><div class="por"><b>Por qué puede ser un problema:</b> ' + h(e.por) + '</div><div class="bien">✅ ' + h(e.bien) + '</div></div>'; }).join('') + '</div>';
+    const fq = FAQ.filter(function (f) { return f.sec && f.sec.indexOf(sec) >= 0 && (f.cat === 'comun' || f.cat === S.modo); });
+    if (fq.length) html += '<div class="minifaq"><h4>Dudas sobre este apartado</h4>' + fq.map(function (f) { return '<details><summary>' + h(f.q) + '</summary><p>' + h(f.a) + '</p></details>'; }).join('') + '</div>';
+    return html;
+  }
+  function refrescarPlantillas() {
+    const sec = pasoActual(); if (!SEC[sec]) return;
+    const d = D(), cx = ctx();
+    SEC[sec].plantillas.forEach(function (p, j) {
+      const pv = document.getElementById('pv-' + sec + '-' + j), pc = document.getElementById('pc-' + sec + '-' + j);
+      if (pv) pv.innerHTML = previewHTML(p.t, d.r, cx.persona);
+      if (pc) pc.textContent = contarPalabras(textoPlantilla(p.t, d.r, cx.persona)) + ' palabras con tus respuestas';
+    });
+  }
+  function refrescarRevision(sec) {
+    const t = D().txt[sec] || '';
+    const c = document.getElementById('cnt-' + sec); if (c) c.innerHTML = contadorHTML(sec, t);
+    const r = document.getElementById('rev-' + sec); if (r) r.innerHTML = revisionHTML(sec);
+    refrescarPasos();
+  }
+
+  /* ------------------------------ Final ------------------------------ */
+  function pasoFinal() {
+    const d = D(), M = MODOS[S.modo], cx = ctx();
+    const filas = [];
+    const reqOK = chkOK(M.antes) && chkOK(M.modalidad);
+    filas.push({ et: 'Requisitos de modalidad', s: reqOK ? 'ok' : 'err', txt: reqOK ? 'Confirmados' : 'Faltan confirmaciones', i: 0 });
+    if (M.docs.length) { const ok = M.docs.every(function (id) { return d.chk[id]; }); filas.push({ et: 'Documentación (compromiso firmado por todos)', s: ok ? 'ok' : 'err', txt: ok ? 'Confirmada' : 'Sin confirmar: la solicitud se rechazaría', i: 2 }); }
+    if (S.modo === 'proyectum') filas.push({ et: 'Propuesta de Red Proyectum', s: d.briefing ? 'ok' : 'err', txt: d.briefing ? BRIEFINGS[d.briefing].nombre : 'Sin elegir', i: 0 });
+    filas.push({ et: '2. Área de trabajo', s: d.linea != null ? 'ok' : 'err', txt: d.linea != null ? 'Línea ' + (d.linea + 1) : 'Sin elegir', i: 3 });
+    ORDEN_TEXTOS.forEach(function (sec) {
+      const e = estadoTexto(sec); const t = d.txt[sec] || '';
+      const v = veredicto(revisar(sec, t, cx));
+      let s, tx;
+      if (e === 'vacio') { s = 'err'; tx = 'Sin completar'; }
+      else if (v.s === 'err') { s = 'err'; tx = 'Tiene puntos marcados con ✗'; }
+      else if (!d.listo[sec]) { s = 'warn'; tx = 'Escrito, falta marcarlo como terminado'; }
+      else if (v.s === 'warn') { s = 'warn'; tx = 'Terminado, con avisos que revisar'; }
+      else { s = 'ok'; tx = 'Terminado'; }
+      filas.push({ et: SEC[sec].num + '. ' + SEC[sec].corto, s: s, txt: tx, i: PASOS.findIndex(function (p) { return p.id === sec; }) });
+    });
+    const todo = filas.every(function (f) { return f.s !== 'err'; }) && ORDEN_TEXTOS.every(function (s) { return d.listo[s]; });
+    let html = '<div class="bloque"><p class="titular' + (todo ? ' ok' : '') + '">' + (todo ? 'Tu ficha está preparada para revisión' : 'Tu ficha todavía no está completa') + '</p><p>' + (todo ? 'Has completado los elementos que podemos comprobar. Revisa el texto una última vez antes de pegarlo.' : 'Completa los elementos marcados en rojo. Puedes ir a cada uno desde aquí.') + '</p><ul class="resumen">' +
+      filas.map(function (f) { return '<li><span class="m ' + f.s + '" style="width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:.78rem;font-weight:800;flex:none">' + (f.s === 'ok' ? '✓' : f.s === 'warn' ? '!' : '✗') + '</span><span class="et">' + h(f.et) + '</span><span class="st ' + f.s + '">' + h(f.txt) + '</span><button class="btn fant" data-action="paso" data-i="' + f.i + '">Ir</button></li>'; }).join('') + '</ul></div>';
+    html += '<div class="bloque"><h3>Texto listo para copiar</h3><div class="marca-form"><b>Marca en la plataforma:</b> 1. Modalidad: «' + h(M.nombre) + '» · 2. Área específica de trabajo: ' + (d.linea != null ? '«' + h(LINEAS[d.linea]) + '»' : '<span style="color:var(--rojo)">sin elegir</span>') + '</div>';
+    ORDEN_TEXTOS.forEach(function (sec) {
+      const t = (d.txt[sec] || '').trim();
+      html += '<div class="copia"><header><span>' + SEC[sec].num + '. ' + h(SEC[sec].nombre) + ' <span style="font-weight:400;color:var(--gris)">(' + contarPalabras(t) + ' palabras)</span></span>' + (t ? '<button class="btn copiar peq" data-action="copiar" data-sec="' + sec + '">📋 Copiar</button>' : '') + '</header><div class="cuerpo">' + (t ? h(t) : '<span class="vacio">Sin completar</span>') + '</div></div>';
+    });
+    html += '<div class="acciones"><button class="btn copiar" data-action="copiarTodo">📋 Copiar todo</button><button class="btn sec" data-action="descargar">Descargar como .txt</button></div><p class="nota">«Copiar todo» incluye los títulos de cada apartado para que sepas dónde va cada texto. En la plataforma, pega cada texto en su campo.</p></div>';
+    const envio = [{ id: 'e1', t: 'He pegado cada texto en su campo de la plataforma.', crit: true }, { id: 'e2', t: 'He comprobado en la plataforma que cada texto se ha pegado completo.', crit: true }];
+    if (M.docs.length) envio.push({ id: 'e3', t: 'He adjuntado el compromiso firmado por todos los miembros.', crit: true });
+    envio.push({ id: 'e4', t: 'He guardado borrador y lo he revisado.', crit: true }, { id: 'e5', t: 'Sé que solo puedo enviarlo una vez.', crit: true }, { id: 'e6', t: 'Seguiré el estado desde «Resultado de actividades».', crit: false });
+    html += '<div class="bloque"><h3>Antes de enviar en la plataforma</h3>' + checklist(envio) + '<div class="alerta azul"><strong>Qué pasa después</strong>Estados del formulario: Pendiente, Borrador y Enviado. La coordinación responderá «Aceptado provisional» o «Rechazado»; si es «Rechazado», tendrás que completarlo de nuevo y volver a enviarlo. Para dudas, usa el foro de dudas generales, abierto hasta el ' + h(CONV.cierre) + '.</div></div>';
+    return html;
+  }
+  function textoTodo() {
+    const d = D(), M = MODOS[S.modo];
+    return ORDEN_TEXTOS.map(function (sec) { return SEC[sec].num + '. ' + SEC[sec].nombre + '\n' + ((d.txt[sec] || '').trim() || '[sin completar]'); }).join('\n\n');
+  }
+
+  /* ------------------------------ FAQ ------------------------------ */
+  function renderFaq() {
+    const cats = [['todas', 'Todas'], ['comun', 'Comunes'], ['individual', 'Individual'], ['grupal', 'Grupal'], ['proyectum', 'Red Proyectum']];
+    const et = { comun: 'Común', individual: 'Individual', grupal: 'Grupal', proyectum: 'Red Proyectum' };
+    return '<div class="hero" style="padding-bottom:0"><h2>Preguntas frecuentes</h2><p class="lead">Las dudas que más errores provocan en las solicitudes, respondidas a partir de las instrucciones de la coordinación.</p></div>' +
+      '<div class="faq-bar"><label class="sr" for="faq-q">Buscar</label><input id="faq-q" type="search" placeholder="Buscar: compromiso, palabras, implementar…" value="' + h(TMP.faqQ) + '">' +
+      cats.map(function (c) { return '<button class="filtro' + (TMP.faqCat === c[0] ? ' act' : '') + '" data-action="faqCat" data-c="' + c[0] + '">' + c[1] + '</button>'; }).join('') + '</div>' +
+      '<div class="faq" id="faq-list">' + faqLista(et) + '</div>';
+  }
+  function faqLista(et) {
+    et = et || { comun: 'Común', individual: 'Individual', grupal: 'Grupal', proyectum: 'Red Proyectum' };
+    const q = norm(TMP.faqQ);
+    const l = FAQ.filter(function (f) { return (TMP.faqCat === 'todas' || f.cat === TMP.faqCat) && (!q || norm(f.q + ' ' + f.a).indexOf(q) >= 0); });
+    if (!l.length) return '<p>No hay preguntas con ese texto. Prueba con otra palabra o consulta el foro de dudas.</p>';
+    return l.map(function (f) { return '<details><summary><span class="chip">' + et[f.cat] + '</span><span>' + h(f.q) + '</span></summary><div class="resp">' + h(f.a) + '</div></details>'; }).join('');
+  }
+
+  /* ------------------------------ Utilidades ------------------------------ */
+  let tT = null;
+  function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(tT); tT = setTimeout(function () { t.classList.remove('on'); }, 2600); }
+  function limpiarCopia(t) { return String(t || '').replace(/[ \t]+/g, ' ').replace(/ *\n */g, '\n').replace(/\n{3,}/g, '\n\n').trim(); }
+  function copiar(txt, msg) {
+    if (!txt) { toast('No hay texto para copiar.'); return; }
+    const hecho = function () { toast(msg || 'Copiado. Ahora pégalo en su campo de la plataforma.'); };
+    const viejo = function () {
+      const ta = document.createElement('textarea'); ta.value = txt; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, txt.length);
+      let ok = false; try { ok = document.execCommand('copy'); } catch (e) { }
+      document.body.removeChild(ta);
+      ok ? hecho() : toast('No se ha podido copiar. Selecciona el texto y usa Ctrl+C (o mantén pulsado en el móvil).');
+    };
+    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(hecho, viejo); else viejo();
+  }
+  function prefillBriefing(k) {
+    const d = D(), b = BRIEFINGS[k];
+    const antes = d.briefing ? BRIEFINGS[d.briefing].prefill : {};
+    Object.keys(b.prefill).forEach(function (s) { if (!d.r[s] || d.r[s] === antes[s]) d.r[s] = b.prefill[s]; });
+    Object.keys(antes).forEach(function (s) { if (!(s in b.prefill) && d.r[s] === antes[s]) d.r[s] = ''; });
+  }
+  function irPaso(i) { S.paso[S.modo] = Math.max(0, Math.min(PASOS.length - 1, i)); render(true); }
+
+  /* ------------------------------ Acciones ------------------------------ */
+  const A = {
+    ir: function (b) { const v = b.dataset.v; if (v === 'inicio' || v === 'faq') S.vista = v; else { S.vista = 'modo'; S.modo = v; D(); } render(true); },
+    paso: function (b) { irPaso(+b.dataset.i); },
+    mover: function (b) { irPaso((S.paso[S.modo] || 0) + (+b.dataset.d)); },
+    irBriefing: function () { S.paso[S.modo] = 0; render(); const n = document.getElementById('briefing'); if (n) n.scrollIntoView({ behavior: 'smooth' }); },
+    entrada: function (b) { D().entrada[b.dataset.sec] = b.dataset.m; render(); },
+    montar: function (b) {
+      const sec = b.dataset.sec, d = D(), cx = ctx();
+      const t = textoPlantilla(SEC[sec].plantillas[d.pl[sec] || 0].t, d.r, cx.persona);
+      if (d.txt[sec] && d.txt[sec].trim() && d.txt[sec] !== t) d.prev[sec] = d.txt[sec];
+      d.txt[sec] = t; d.listo[sec] = false; render();
+      const r = document.getElementById('res-' + sec); if (r) r.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      toast(/\[[^\]]+\]/.test(t) ? 'Plantilla pasada. Completa los huecos en corchetes.' : 'Plantilla pasada al resultado. Revísala y edítala si quieres.');
+    },
+    deshacer: function (b) { const d = D(), s = b.dataset.sec; const tmp = d.txt[s]; d.txt[s] = d.prev[s]; d.prev[s] = tmp || null; d.listo[s] = false; render(); },
+    limpiar: function (b) {
+      const s = b.dataset.sec, d = D();
+      if ((d.txt[s] || d.pegado[s]) && !confirm('¿Borrar el texto de este apartado y empezar de nuevo? Tus respuestas a las preguntas se mantienen.')) return;
+      d.txt[s] = ''; d.pegado[s] = ''; d.prev[s] = null; d.listo[s] = false; TMP.prop[s] = null; render();
+    },
+    copiar: function (b) {
+      const s = b.dataset.sec, t = limpiarCopia(D().txt[s]);
+      const v = veredicto(revisar(s, t, ctx()));
+      copiar(t, v.s === 'err' ? 'Copiado. Recuerda revisar los puntos marcados con ✗.' : null);
+    },
+    copiarTodo: function () { copiar(textoTodo(), 'Copiado todo. Pega cada apartado en su campo.'); },
+    descargar: function () {
+      const d = D(), M = MODOS[S.modo];
+      const cab = 'Ficha de solicitud de TFM (borrador preparado con la herramienta de apoyo)\n1. Modalidad: ' + M.nombre + '\n2. Área específica de trabajo: ' + (d.linea != null ? LINEAS[d.linea] : '[sin elegir]') + (S.modo === 'proyectum' && d.briefing ? '\nPropuesta de Red Proyectum: ' + BRIEFINGS[d.briefing].nombre : '') + '\n\n';
+      try {
+        const blob = new Blob([cab + textoTodo() + '\n'], { type: 'text/plain;charset=utf-8' });
+        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ficha-tfm-' + S.modo + '.txt';
+        document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+      } catch (e) { toast('No se ha podido descargar. Usa «Copiar todo».'); }
+    },
+    listo: function (b) {
+      const s = b.dataset.sec, d = D();
+      if (!(d.txt[s] || '').trim()) { toast('Primero escribe o pasa tu texto al resultado.'); return; }
+      const v = veredicto(revisar(s, d.txt[s], ctx()));
+      if (v.s === 'err' && !confirm('Hay puntos marcados con ✗. ¿Quieres marcar el apartado como terminado igualmente?')) return;
+      d.listo[s] = true; render();
+      toast(v.s === 'ok' ? 'Apartado terminado. Has completado los elementos que podemos comprobar.' : 'Apartado marcado. Revisa los avisos antes de enviar.');
+    },
+    analizar: function (b) {
+      const s = b.dataset.sec, d = D();
+      if (!(d.pegado[s] || '').trim()) { toast('Pega primero tu texto.'); return; }
+      TMP.prop[s] = proponerVersion(s, d.pegado[s], ctx());
+      if (!(d.txt[s] || '').trim()) { d.txt[s] = String(d.pegado[s]).trim(); d.listo[s] = false; }
+      render();
+    },
+    usarProp: function (b) { const s = b.dataset.sec, d = D(); if (d.txt[s] && d.txt[s] !== TMP.prop[s].texto) d.prev[s] = d.txt[s]; d.txt[s] = TMP.prop[s].texto; d.listo[s] = false; render(); toast('Versión revisable pasada al resultado.'); },
+    usarMio: function (b) { const s = b.dataset.sec, d = D(); const t = String(d.pegado[s] || '').trim(); if (d.txt[s] && d.txt[s] !== t) d.prev[s] = d.txt[s]; d.txt[s] = t; d.listo[s] = false; render(); toast('Tu texto está en el resultado.'); },
+    ej: function (b) {
+      const k = b.dataset.slot, d = D();
+      d.r[k] = b.dataset.v;
+      const inp = document.querySelector('input[data-slot="' + k + '"]');
+      if (inp) { inp.value = b.dataset.v; refrescarPlantillas(); guardar(); const y = window.scrollY; render(); window.scrollTo(0, y); }
+      else { const y = window.scrollY; render(); window.scrollTo(0, y); }
+    },
+    briefing: function (b) { const k = b.dataset.b, d = D(); prefillBriefing(k); d.briefing = k; d.chk.p2 = true; render(); },
+    faqCat: function (b) { TMP.faqCat = b.dataset.c; render(); },
+    borrarTodo: function () {
+      if (!confirm('¿Borrar todos tus textos y respuestas guardados en este navegador? No se puede deshacer.')) return;
+      try { localStorage.removeItem(KEY); } catch (e) { }
+      S = { vista: 'inicio', modo: null, paso: {}, datos: {} }; TMP.prop = {}; render(true); toast('Datos borrados de este navegador.');
+    }
+  };
+
+  document.addEventListener('click', function (e) {
+    const b = e.target.closest('[data-action]'); if (!b) return;
+    const f = A[b.dataset.action]; if (f) { e.preventDefault(); f(b); }
+  });
+  document.addEventListener('input', function (e) {
+    const t = e.target, d = S.modo ? D() : null;
+    if (t.dataset.slot && d) { d.r[t.dataset.slot] = t.value; refrescarPlantillas(); guardar(); }
+    else if (t.dataset.txt && d) { const s = t.dataset.txt; d.txt[s] = t.value; if (d.listo[s]) { d.listo[s] = false; const bt = document.querySelector('[data-action="listo"][data-sec="' + s + '"]'); if (bt) bt.textContent = 'Marcar apartado como terminado'; } refrescarRevision(s); guardar(); }
+    else if (t.dataset.pegado && d) { d.pegado[t.dataset.pegado] = t.value; guardar(); }
+    else if (t.id === 'faq-q') { TMP.faqQ = t.value; const l = document.getElementById('faq-list'); if (l) l.innerHTML = faqLista(); }
+  });
+  document.addEventListener('change', function (e) {
+    const t = e.target; if (!S.modo) return; const d = D();
+    if (t.dataset.chk) { d.chk[t.dataset.chk] = t.checked; const y = window.scrollY; render(); window.scrollTo(0, y); }
+    else if (t.dataset.plantilla) { d.pl[t.dataset.plantilla] = +t.value; const y = window.scrollY; render(); window.scrollTo(0, y); }
+    else if (t.dataset.linea != null && t.dataset.linea !== undefined && t.name === 'linea') { d.linea = +t.dataset.linea; const y = window.scrollY; render(); window.scrollTo(0, y); }
+  });
+
+  render();
+})();
+
+</script>
+</body>
+</html>
